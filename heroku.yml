@@ -1,0 +1,7 @@
+setup:
+  config:
+    PORT: "${PORT}"
+
+build:
+  docker:
+    web: Dockerfile

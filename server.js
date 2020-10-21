@@ -5,7 +5,7 @@ const app = express();
 app.use(express.static('build'));
 
 // let the react app to handle any unknown routes
-// serve up the index.html if express does'nt recognize the route
+// serve up the index.html if express doesn't recognize the route
 const path = require('path');
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'build', 'index.html'));

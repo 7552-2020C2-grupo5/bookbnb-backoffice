@@ -6,12 +6,10 @@ import UserProfile from "./views/UserProfile";
 
 export default function App() {
     return (
-        <div className="App">
-            <Router>
-                <Route exact path={'/users'} component={UsersList}/>
-                <Route exact path={'/users/:id'} component={UserProfile}/>
-            </Router>
-        </div>
+        <Router>
+            <Route exact path={'/'} component={UsersList}/>
+            <Route exact path={'/users/:id'} component={UserProfile}/>
+        </Router>
     );
 }
 

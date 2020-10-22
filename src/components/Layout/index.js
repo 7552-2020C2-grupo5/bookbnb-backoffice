@@ -32,7 +32,7 @@ export default function Layout({content}) {
                 <ListItemText primary={text} />
             </ListItem>
         ));
-    }
+    };
 
     const handleDrawerOpen = () => {
         setOpen(true);

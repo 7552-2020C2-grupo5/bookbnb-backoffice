@@ -32,7 +32,7 @@ function UsersTable({users}) {
                     {user.email}
                 </TableCell>
                 <TableCell width={"20%"}>
-                    <IconButton component={Link} to={"/users/" + user.id} color="primary" onClick={() => alert("HOLA")}>
+                    <IconButton component={Link} to={"/users/" + user.id} color="primary">
                         <PersonIcon/>
                     </IconButton>
                     <IconButton color="secondary">

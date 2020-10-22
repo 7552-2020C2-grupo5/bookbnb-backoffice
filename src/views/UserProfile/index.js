@@ -29,7 +29,7 @@ export default function UserProfile(props) {
         axios.get("https://reqres.in/api/users/" + props.match.params.id)
             .then((response) => {
             setUser(response.data.data);
-            setTimeout(() => setLoading(false), 2000);
+            setTimeout(() => setLoading(false), 1000);
         });
     }, [props.match.params.id]);
 

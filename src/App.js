@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import UsersList from "./views/UsersList";
-import UserProfile from "./views/UserProfile";
+import UsersList from "./components/views/UsersList";
+import UserProfile from "./components/views/UserProfile";
 
 export default function App() {
     return (

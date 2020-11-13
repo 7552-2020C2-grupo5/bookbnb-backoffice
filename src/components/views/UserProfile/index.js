@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Layout from "../../components/Layout";
+import Layout from "../../common/Layout";
 import axios from "axios";
 import Card from "@material-ui/core/Card";
 import Divider from "@material-ui/core/Divider";
@@ -7,7 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import UserAvatar from "./UserAvatar";
 import Container from "@material-ui/core/Container";
-import Loader from "../../components/Loader";
+import Loader from "../../common/Loader";
 import UserData from "./UserData";
 
 const useStyles = makeStyles((theme) => ({

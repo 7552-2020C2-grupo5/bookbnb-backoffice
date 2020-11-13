@@ -1,5 +1,5 @@
 import Grid from "@material-ui/core/Grid";
-import StaticField from "../../../components/StaticField";
+import StaticField from "../../../common/StaticField";
 import React from "react";
 
 export default function UserData({name, surname, email}) {

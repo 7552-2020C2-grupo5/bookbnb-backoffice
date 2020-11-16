@@ -2,8 +2,10 @@ class App {
     routes() {
         return {
             login: '/',
-            user: '/user',
-            publication: '/profile'
+            users: '/users',
+            userProfile: '/users/:id',
+            publications: '/publications',
+            publication: '/publications/:id'
         }
     }
 

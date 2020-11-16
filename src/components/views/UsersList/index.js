@@ -2,21 +2,27 @@ import React, {useEffect, useState} from 'react';
 import Layout from "../../common/Layout";
 import Loader from "../../common/Loader";
 import {DataTable} from "../../common/DataTable";
+import axios from "axios";
+import {app} from "../../../app/app";
+import Typography from "@material-ui/core/Typography";
+import {Container} from "@material-ui/core";
+import Divider from "@material-ui/core/Divider";
 
 
 export default function UsersList() {
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
 
+    const onResponse = (response) => {
+        setUsers(response.data);
+        setTimeout(() => setLoading(false), 1000);
+    }
+
     // When the user enters the screen, the
     useEffect(() => {
-        setUsers(
-            [
-                {'id': 2, 'first_name': 'Janet', 'last_name': 'Weaver', 'email': 'janet.weaver@reqres.in'},
-                {'id': 3, 'first_name': 'Emma', 'last_name': 'Wong', 'email': 'janet.weaver@reqres.in'},
-            ]
-        );
-        setTimeout(() => setLoading(false), 1000);
+        setLoading(true);
+        axios.get("https://bookbnb5-users-microservice.herokuapp.com/v1/user")
+            .then(onResponse);
     }, []);
 
     const columns = () => {
@@ -34,9 +40,13 @@ export default function UsersList() {
             );
         }
         return(
-            <DataTable rows={users} columns={columns()}
-                       modalTitle={"¿Está seguro que desea bloquear al usuario?"}
-                       modalDescription={"Un usuario bloqueado no podrá acceder a la plataforma"}/>
+            <Container>
+                <Typography variant="h4">Listado de usuarios</Typography>
+                <DataTable rows={users} columns={columns()}
+                           modalTitle={"¿Está seguro que desea bloquear al usuario?"}
+                           modalDescription={"Un usuario bloqueado no podrá acceder a la plataforma"}
+                           urlViewElement={app.routes().users + '/'}/>
+            </Container>
         );
     }
 

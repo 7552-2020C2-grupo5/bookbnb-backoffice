@@ -1,18 +1,18 @@
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import {Link} from "react-router-dom";
-import PersonIcon from "@material-ui/icons/Person";
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import BlockIcon from "@material-ui/icons/Block";
 import TableCell from "@material-ui/core/TableCell";
 import React from "react";
 
-export function DataTableCell({row, column, handleClickView, handleClickBlock}) {
+export function DataTableCell({row, column, urlViewElement, handleClickBlock}) {
     const renderActions = () => {
         return (
             <div>
                 <Tooltip title="Ver">
-                    <IconButton component={Link} to={"/users/" + row[column.field]} color="primary">
-                        <PersonIcon/>
+                    <IconButton component={Link} to={urlViewElement + row[column.field]} color="primary">
+                        <VisibilityIcon/>
                     </IconButton>
                 </Tooltip>
                 <Tooltip title={"Bloquear"}>
@@ -37,7 +37,7 @@ export function DataTableCell({row, column, handleClickView, handleClickBlock}) 
     };
 
     return (
-        <TableCell>
+        <TableCell key={row[column.field]}>
             {content()}
         </TableCell>
     );

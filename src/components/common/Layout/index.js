@@ -15,24 +15,18 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import PersonIcon from "@material-ui/icons/Person";
+import HouseIcon from '@material-ui/icons/House';
 import useStyles from './styles'
+import { Link } from 'react-router-dom';
+import {app} from "../../../app/app";
+import MenuOption from "./MenuOption";
 
 
 export default function Layout({content}) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
-
-    const menuOptions = () => {
-        return ['Usuarios', 'Publicaciones', 'Servidores', 'Métricas'].map((text, index) => (
-            <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-            </ListItem>
-        ));
-    };
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -82,7 +76,8 @@ export default function Layout({content}) {
                 </div>
                 <Divider />
                 <List>
-                    {menuOptions()}
+                    <MenuOption icon={PersonIcon} text={'Usuarios'} route={app.routes().users} />
+                    <MenuOption icon={HouseIcon} text={'Publicaciones'} route={app.routes().publications} />
                 </List>
             </Drawer>
             <main

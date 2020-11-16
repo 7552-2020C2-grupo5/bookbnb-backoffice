@@ -10,14 +10,14 @@ import TableBody from "@material-ui/core/TableBody";
 import TablePagination from "@material-ui/core/TablePagination";
 import {ConfirmationModal} from "../ConfirmationModal";
 
-export function DataTable({rows, columns, handleClickView, handleBlock, modalDescription, modalTitle}) {
+export function DataTable({rows, columns, urlViewElement, handleBlock, modalDescription, modalTitle}) {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(1);
     const [openDialog, setOpenDialog] = useState(false);
     const [selectedElementId, setSelectedElementId] = useState(undefined);
 
     const handleClickBlock = (event) => {
-        let button = event.currentTarget
+        let button = event.currentTarget;
         console.log(button.id);
         setSelectedElementId(button.id);
         setOpenDialog(true);
@@ -49,7 +49,7 @@ export function DataTable({rows, columns, handleClickView, handleBlock, modalDes
                     <DataTableCell row={row}
                                    column={column}
                                    handleClickBlock={handleClickBlock}
-                                   handleClickView={handleClickView}/>)}
+                                   urlViewElement={urlViewElement}/>)}
             </TableRow>
         );
     };
@@ -70,7 +70,7 @@ export function DataTable({rows, columns, handleClickView, handleBlock, modalDes
                 </Table>
             </TableContainer>
             <TablePagination
-                rowsPerPageOptions={[1, 2]}
+                rowsPerPageOptions={[1, 5, 10]}
                 component="div"
                 count={rows.length}
                 rowsPerPage={rowsPerPage}

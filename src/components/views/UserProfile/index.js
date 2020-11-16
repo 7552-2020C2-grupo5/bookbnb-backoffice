@@ -4,19 +4,11 @@ import axios from "axios";
 import Card from "@material-ui/core/Card";
 import Divider from "@material-ui/core/Divider";
 import CardContent from "@material-ui/core/CardContent";
-import makeStyles from "@material-ui/core/styles/makeStyles";
 import UserAvatar from "./UserAvatar";
 import Container from "@material-ui/core/Container";
 import Loader from "../../common/Loader";
 import UserData from "./UserData";
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-    },
-}));
+import {useStyles} from "./styles";
 
 
 export default function UserProfile(props) {
@@ -24,13 +16,15 @@ export default function UserProfile(props) {
     const [loading, setLoading] = useState(true);
     const classes = useStyles();
 
+    const onResponse = (response) => {
+        setUser(response.data.resource);
+        setTimeout(() => setLoading(false), 1000);
+    }
+
     useEffect(() => {
-        console.log(props.match.params.id);
-        axios.get("https://reqres.in/api/users/" + props.match.params.id)
-            .then((response) => {
-            setUser(response.data.data);
-            setTimeout(() => setLoading(false), 1000);
-        });
+        setLoading(true);
+        axios.get("https://bookbnb5-users-microservice.herokuapp.com/v1/user/" + props.match.params.id)
+            .then(onResponse);
     }, [props.match.params.id]);
 
     const content = () => {

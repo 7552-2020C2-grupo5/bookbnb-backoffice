@@ -18,15 +18,17 @@ import ListItemText from '@material-ui/core/ListItemText';
 import PersonIcon from "@material-ui/icons/Person";
 import HouseIcon from '@material-ui/icons/House';
 import useStyles from './styles'
-import { Link } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {app} from "../../../app/app";
 import MenuOption from "./MenuOption";
+import {Button} from "@material-ui/core";
 
 
 export default function Layout({content}) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    let history = useHistory();
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -34,6 +36,11 @@ export default function Layout({content}) {
 
     const handleDrawerClose = () => {
         setOpen(false);
+    };
+
+    const handleLogOut = () => {
+        app.logoutUser();
+        history.push("/")
     };
 
     return (
@@ -58,6 +65,7 @@ export default function Layout({content}) {
                     <Typography variant="h6" noWrap>
                         BookBnb
                     </Typography>
+                    <Button onClick={handleLogOut}>Cerrar sesión</Button>
                 </Toolbar>
             </AppBar>
             <Drawer

@@ -6,16 +6,21 @@ import UserProfile from "./components/views/UserProfile";
 import {app} from "./app/app";
 import PublicationsList from "./components/views/PublicationsList";
 import Publication from "./components/views/Publication";
+import Login from "./components/views/Login";
+import Home from "./components/views/Home";
+import PrivateRoute from "./components/common/PrivateRoute";
 
 export default function App() {
     const routes = app.routes();
 
     return (
         <Router>
-            <Route exact path={routes.users} component={UsersList}/>
-            <Route exact path={routes.userProfile} component={UserProfile}/>
-            <Route exact path={routes.publications} component={PublicationsList}/>
-            <Route exact path={routes.publication} component={Publication}/>
+            <Route exact path={routes.login} component={Login}/>
+            <PrivateRoute exact path={routes.home} component={Home}/>
+            <PrivateRoute exact path={routes.users} component={UsersList}/>
+            <PrivateRoute exact path={routes.userProfile} component={UserProfile}/>
+            <PrivateRoute exact path={routes.publications} component={PublicationsList}/>
+            <PrivateRoute exact path={routes.publication} component={Publication}/>
         </Router>
     );
 }

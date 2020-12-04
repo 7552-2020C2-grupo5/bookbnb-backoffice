@@ -2,42 +2,13 @@ import React, {useEffect, useState} from 'react';
 import Layout from "../../common/Layout";
 import axios from "axios";
 import Card from "@material-ui/core/Card";
-import Divider from "@material-ui/core/Divider";
 import CardContent from "@material-ui/core/CardContent";
-import makeStyles from "@material-ui/core/styles/makeStyles";
 import Container from "@material-ui/core/Container";
 import Loader from "../../common/Loader";
-import {Typography} from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import StaticField from "../../common/StaticField";
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-    },
-}));
-
-function PublicationInfo({rooms, beds, bathrooms, pricePerNight}) {
-    return (
-        <Grid container direction="row">
-            <Grid item md={3} xs={6}>
-                <StaticField label='Habitaciones' value={rooms}/>
-            </Grid>
-            <Grid item md={3} xs={6}>
-                <StaticField label='Camas' value={beds}/>
-            </Grid>
-            <Grid item md={3} xs={6}>
-                <StaticField label='Baños' value={bathrooms}/>
-            </Grid>
-            <Grid item md={3} xs={6}>
-                <StaticField label='Precio por noche' value={pricePerNight}/>
-            </Grid>
-        </Grid>
-    );
-}
-
+import {PublicationImages} from "./PublicationImages";
+import {PublicationInfo} from "./PublicationInfo";
+import {useStyles} from "./styles";
+import {PublicationTitle} from "./PublicationTitle";
 
 export default function Publication(props) {
     const [publication, setPublication] = useState({});
@@ -45,7 +16,6 @@ export default function Publication(props) {
     const classes = useStyles();
 
     const onResponse = (response) => {
-        debugger;
         setPublication(response.data);
         setTimeout(() => setLoading(false), 1000);
     }
@@ -55,6 +25,14 @@ export default function Publication(props) {
         axios.get("https://bookbnb5-publications.herokuapp.com/v1/publication/" + props.match.params.id)
             .then(onResponse);
     }, [props.match.params.id]);
+
+    const publicationImages = () => {
+        const images = [
+            'https://i2.wp.com/www.arquitour.com/wp-content/uploads/2009/02/calamuchita-20.jpg?w=749&h=891&crop',
+            'https://i2.wp.com/www.arquitour.com/wp-content/uploads/2009/02/calamuchita-7.jpg?resize=590%2C391'
+        ]
+        return images;
+    };
 
     const content = () => {
         if (loading) {
@@ -66,16 +44,16 @@ export default function Publication(props) {
             <Container>
                 <Card className={classes.root}>
                     <CardContent>
-                        <Typography variant={'h4'} gutterBottom>
-                            {publication.title}
-                        </Typography>
+                        <PublicationTitle description={publication.description}
+                                          title={publication.title}/>
                     </CardContent>
                     <CardContent>
-
+                        <PublicationImages images={publicationImages()}/>
                     </CardContent>
                     <CardContent>
                         <PublicationInfo bathrooms={publication.bathrooms} beds={publication.beds}
-                                         pricePerNight={publication.price_per_night} rooms={publication.rooms}/>
+                                         pricePerNight={publication.price_per_night} rooms={publication.rooms}
+                                         description={publication.description}/>
                     </CardContent>
                 </Card>
             </Container>

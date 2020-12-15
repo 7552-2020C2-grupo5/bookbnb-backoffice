@@ -13,7 +13,7 @@ export function PublicationImages({images}) {
                 {images.map((imgSrc) => {
                     return (
                         <Box key={imgSrc} className={classes.container}>
-                            <img src={imgSrc} className={classes.image}/>
+                            <img src={imgSrc} alt="" className={classes.image}/>
                         </Box>
                     );
                 })}

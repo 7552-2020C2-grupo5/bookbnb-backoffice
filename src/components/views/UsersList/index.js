@@ -4,16 +4,15 @@ import Loader from "../../common/Loader";
 import {DataTable} from "../../common/DataTable";
 import axios from "axios";
 import {app} from "../../../app/app";
-import Typography from "@material-ui/core/Typography";
 import {Container} from "@material-ui/core";
-import Divider from "@material-ui/core/Divider";
+import SectionTitle from "../../common/SectionTitle";
 
 
 export default function UsersList() {
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
 
-    const onResponse = (response) => {
+    const handleResponse = (response) => {
         setUsers(response.data);
         setTimeout(() => setLoading(false), 1000);
     }
@@ -22,7 +21,7 @@ export default function UsersList() {
     useEffect(() => {
         setLoading(true);
         axios.get("https://bookbnb5-users-microservice.herokuapp.com/v1/user")
-            .then(onResponse);
+            .then(handleResponse);
     }, []);
 
     const columns = () => {
@@ -41,7 +40,7 @@ export default function UsersList() {
         }
         return(
             <Container>
-                <Typography variant="h4">Listado de usuarios</Typography>
+                <SectionTitle title="Listado de usuarios" />
                 <DataTable rows={users} columns={columns()}
                            modalTitle={"¿Está seguro que desea bloquear al usuario?"}
                            modalDescription={"Un usuario bloqueado no podrá acceder a la plataforma"}

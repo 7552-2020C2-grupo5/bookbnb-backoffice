@@ -1,4 +1,10 @@
+import {Requester} from "../server-requester/requester";
+
 class App {
+    constructor() {
+        this._apiClient = new Requester();
+    }
+
     routes() {
         return {
             login: '/login',
@@ -8,6 +14,10 @@ class App {
             publications: '/publications',
             publication: '/publications/:id'
         }
+    }
+
+    apiClient() {
+        return this._apiClient;
     }
 
     loginUser(token) {

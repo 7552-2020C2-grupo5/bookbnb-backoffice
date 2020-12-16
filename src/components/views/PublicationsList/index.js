@@ -4,14 +4,15 @@ import Loader from "../../common/Loader";
 import {DataTable} from "../../common/DataTable";
 import axios from "axios";
 import {app} from "../../../app/app";
-import {Accordion, AccordionDetails, AccordionSummary, Container, Paper} from "@material-ui/core";
+import {Accordion, AccordionActions, AccordionDetails, AccordionSummary, Container, Paper} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
-import NumberField from "../../common/NumberField";
+import NumericField from "../../common/NumericField";
 import SectionTitle from "../../common/SectionTitle";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
 
 function Filter({onFiltersApplied}) {
     const [filters, setFilters] = useState({
@@ -25,15 +26,13 @@ function Filter({onFiltersApplied}) {
         root: {
             display: 'flex',
             flexDirection: 'column',
+            width: '100%'
         },
         filtersContainer: {
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
-            justifyContent: 'space-evenly',
-        },
-        form: {
-            width: '100%'
+            justifyContent: 'space-between',
         },
         heading: {
             fontSize: theme.typography.pxToRem(15),
@@ -51,11 +50,11 @@ function Filter({onFiltersApplied}) {
     };
 
     const handleClick = () => {
-        debugger;
-        onFiltersApplied({beds: filters.beds});
+        onFiltersApplied(filters);
     };
 
     return (
+        <Box>
         <Accordion>
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -68,20 +67,23 @@ function Filter({onFiltersApplied}) {
                 <div className={classes.root}>
                     <form className={classes.form}>
                         <Box className={classes.filtersContainer}>
-                            <NumberField variant="outlined" label="Habitaciones" onChange={handleInputChange}
-                                         value={filters.rooms} name="rooms"/>
-                            <NumberField variant="outlined" label="Camas" onChange={handleInputChange}
-                                         value={filters.beds} name="beds"/>
-                            <NumberField variant="outlined" label="Baños" onChange={handleInputChange}
-                                         value={filters.bathrooms} name="bathrooms"/>
-                            <NumberField variant="outlined" label="Precio por noche" onChange={handleInputChange}
-                                         value={filters.price_per_night} name="price_per_night" prefix="$"/>
+                            <NumericField variant="outlined" label="Habitaciones" onChange={handleInputChange}
+                                          value={filters.rooms} name="rooms"/>
+                            <NumericField variant="outlined" label="Camas" onChange={handleInputChange}
+                                          value={filters.beds} name="beds"/>
+                            <NumericField variant="outlined" label="Baños" onChange={handleInputChange}
+                                          value={filters.bathrooms} name="bathrooms"/>
+                            <NumericField variant="outlined" label="Precio por noche" onChange={handleInputChange}
+                                          value={filters.price_per_night} name="price_per_night" prefix="$"/>
                         </Box>
                     </form>
-                    <Button onClick={handleClick} color="primary" variant="contained">Aplicar</Button>
                 </div>
             </AccordionDetails>
+            <AccordionActions>
+                <Button onClick={handleClick} color="primary" variant="contained">Aplicar</Button>
+            </AccordionActions>
         </Accordion>
+        </Box>
     );
 }
 
@@ -89,19 +91,13 @@ export default function PublicationsList() {
     const [loading, setLoading] = useState(false);
     const [publications, setPublications] = useState([]);
 
-    const handleResponse = (response) => {
-        setPublications(response.data);
+    const handleResponse = (responseData) => {
+        setPublications(responseData);
         setTimeout(() => setLoading(false), 1000);
     }
 
     const getPublications = useCallback((filters={}) => {
-        // debugger;
-        // var encodedParams = [];
-        // Object.entries(filters).map(([k, v]) => {
-        //     encodedParams.push(`${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
-        // })
-        axios.get("https://bookbnb5-publications.herokuapp.com/v1/publications", {params: filters})
-            .then(handleResponse);
+        app.apiClient().publications(filters).then(handleResponse)
     }, []);
 
     useEffect(() => {

@@ -30,7 +30,7 @@ NumberFormatCustom.propTypes = {
     onChange: PropTypes.func.isRequired,
 };
 
-export default function NumberField(props) {
+export default function NumericField(props) {
     return (
         <TextField
             {...props}
@@ -38,6 +38,7 @@ export default function NumberField(props) {
                 inputComponent: NumberFormatCustom,
                 inputProps: {prefix: props.prefix}
             }}
+            style={{margin: "5px"}}
         />
     );
 }

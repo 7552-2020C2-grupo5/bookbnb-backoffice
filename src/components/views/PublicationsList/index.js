@@ -2,90 +2,11 @@ import React, {useCallback, useEffect, useState} from 'react';
 import Layout from "../../common/Layout";
 import Loader from "../../common/Loader";
 import {DataTable} from "../../common/DataTable";
-import axios from "axios";
 import {app} from "../../../app/app";
-import {Accordion, AccordionActions, AccordionDetails, AccordionSummary, Container, Paper} from "@material-ui/core";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import Box from "@material-ui/core/Box";
-import NumericField from "../../common/NumericField";
+import {Container} from "@material-ui/core";
 import SectionTitle from "../../common/SectionTitle";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
+import {PublicationsFilter} from "./PublicationsFilter";
 
-function Filter({onFiltersApplied}) {
-    const [filters, setFilters] = useState({
-        rooms: "",
-        beds: "",
-        bathrooms: "",
-        price_per_night: "",
-    });
-
-    const useStyles = makeStyles((theme) => ({
-        root: {
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100%'
-        },
-        filtersContainer: {
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-        },
-        heading: {
-            fontSize: theme.typography.pxToRem(15),
-            fontWeight: theme.typography.fontWeightRegular,
-        },
-    }));
-
-    const classes = useStyles();
-
-    const handleInputChange = (event) => {
-        setFilters({
-            ...filters,
-            [event.target.name]: event.target.value,
-        });
-    };
-
-    const handleClick = () => {
-        onFiltersApplied(filters);
-    };
-
-    return (
-        <Box>
-        <Accordion>
-            <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-            >
-                <Typography className={classes.heading}>Filtros</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-                <div className={classes.root}>
-                    <form className={classes.form}>
-                        <Box className={classes.filtersContainer}>
-                            <NumericField variant="outlined" label="Habitaciones" onChange={handleInputChange}
-                                          value={filters.rooms} name="rooms"/>
-                            <NumericField variant="outlined" label="Camas" onChange={handleInputChange}
-                                          value={filters.beds} name="beds"/>
-                            <NumericField variant="outlined" label="Baños" onChange={handleInputChange}
-                                          value={filters.bathrooms} name="bathrooms"/>
-                            <NumericField variant="outlined" label="Precio por noche" onChange={handleInputChange}
-                                          value={filters.price_per_night} name="price_per_night" prefix="$"/>
-                        </Box>
-                    </form>
-                </div>
-            </AccordionDetails>
-            <AccordionActions>
-                <Button onClick={handleClick} color="primary" variant="contained">Aplicar</Button>
-            </AccordionActions>
-        </Accordion>
-        </Box>
-    );
-}
 
 export default function PublicationsList() {
     const [loading, setLoading] = useState(false);
@@ -125,7 +46,7 @@ export default function PublicationsList() {
         return(
             <Container>
                 <SectionTitle title="Listado de publicaciones" />
-                <Filter onFiltersApplied={getPublications}/>
+                <PublicationsFilter onFiltersApplied={getPublications}/>
                 <DataTable rows={publications} columns={columns()}
                            modalTitle={"¿Está seguro que desea bloquear la publicación?"}
                            modalDescription={"No se podrá acceder ni reservar una publicación bloqueada."}

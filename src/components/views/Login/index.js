@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import makeStyles from "@material-ui/core/styles/makeStyles";
 import Card from "@material-ui/core/Card";
 import {CardContent} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
@@ -10,14 +9,7 @@ import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 import {app} from "../../../app/app";
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-    }
-}));
+import {useStyles} from "./styles";
 
 export default function Login() {
     const [userInfo, setUserInfo] = useState({username: '', password: ''});

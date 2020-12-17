@@ -4,7 +4,7 @@ import NumberFormat from 'react-number-format';
 import TextField from '@material-ui/core/TextField';
 
 function NumberFormatCustom(props) {
-    const { inputRef, onChange, prefix, ...other } = props;
+    const { inputRef, onChange, prefix, type, ...other } = props;
 
     return (
         <NumberFormat
@@ -20,6 +20,7 @@ function NumberFormatCustom(props) {
             }}
             isNumericString
             prefix={prefix}
+            allowNegative={false}
         />
     );
 }
@@ -36,7 +37,7 @@ export default function NumericField(props) {
             {...props}
             InputProps={{
                 inputComponent: NumberFormatCustom,
-                inputProps: {prefix: props.prefix}
+                inputProps: {prefix: props.prefix, type: props.type}
             }}
             style={{margin: "5px"}}
         />

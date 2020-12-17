@@ -40,7 +40,7 @@ export default function Login() {
                                        variant="outlined" onChange={handleInputChange}/>
                             <TextField required fullWidth margin="normal" id="password" label="Contraseña"
                                 type="password" variant="outlined" onChange={handleInputChange}/>
-                            <Button fullWidth onClick={handleClick} color="primary" variant="contained">
+                            <Button fullWidth margin="normal" onClick={handleClick} color="primary" variant="contained">
                                 Ingresar
                             </Button>
                         </form>

@@ -1,28 +1,73 @@
 import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
-import {CardContent} from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
+import {CardContent, TextField} from "@material-ui/core";
+import React, {useState} from "react";
+import Layout from "../../common/Layout";
+import SectionTitle from "../../common/SectionTitle";
+import NumericField from "../../common/NumericField";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import Button from "@material-ui/core/Button";
-import React from "react";
-import {PublicationTitle} from "../Publication/PublicationTitle";
-import {PublicationImages} from "../Publication/PublicationImages";
-import {PublicationInfo} from "../Publication/PublicationInfo";
+
+const useStyles = makeStyles((theme) => ({
+    form: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    buttonContainer: {
+        display: 'flex',
+        justifyContent: 'flex-end'
+    }
+}));
 
 export default function NewAdmin() {
-    return (
-        <Container>
-            <Card>
-                <CardContent>
-                </CardContent>
-                <CardContent>
-                    <form>
+    const [administratorData, setAdministratorData] = useState({
+        firstName: "",
+        lastName: "",
+        password: "",
+        email: "",
+    });
+    const classes = useStyles();
 
-                    </form>
-                </CardContent>
-            </Card>
-        </Container>
+    const handleInputChange = (event) => {
+        setAdministratorData({
+            ...administratorData,
+            [event.target.name]: event.target.value,
+        });
+    };
+
+    const handleClick = () => {
+
+    };
+
+    const content = () => {
+        return (
+            <Container>
+                <Card>
+                    <CardContent>
+                        <SectionTitle title="Alta de administrador"/>
+                    </CardContent>
+                    <CardContent>
+                        <form className={classes.form}>
+                            <TextField variant="outlined" label="Nombre" onChange={handleInputChange}
+                                          value={administratorData.firstName} name="firstName"/>
+                            <TextField variant="outlined" label="Apellido" onChange={handleInputChange}
+                                       value={administratorData.lastName} name="lastName"/>
+                            <TextField variant="outlined" label="Email" onChange={handleInputChange}
+                                       value={administratorData.email} name="email"/>
+                            <TextField variant="outlined" label="Password" onChange={handleInputChange}
+                                       value={administratorData.password}  type="password" name="password"/>
+                        </form>
+                    </CardContent>
+                    <CardContent className={classes.buttonContainer}>
+                        <Button onClick={handleClick} color="primary" variant="contained">Crear</Button>
+                    </CardContent>
+                </Card>
+            </Container>
+        );
+    };
+
+    return (
+        <Layout content={content()}/>
     );
 }

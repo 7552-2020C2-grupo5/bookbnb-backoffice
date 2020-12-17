@@ -12,16 +12,15 @@ export default function UsersList() {
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
 
-    const handleResponse = (response) => {
-        setUsers(response.data);
+    const handleResponse = (responseData) => {
+        setUsers(responseData);
         setTimeout(() => setLoading(false), 1000);
     }
 
     // When the user enters the screen, the
     useEffect(() => {
         setLoading(true);
-        axios.get("https://bookbnb5-users-microservice.herokuapp.com/v1/user")
-            .then(handleResponse);
+        app.apiClient().users().then(handleResponse)
     }, []);
 
     const columns = () => {

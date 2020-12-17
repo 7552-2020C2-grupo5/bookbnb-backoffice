@@ -35,7 +35,7 @@ export function PublicationsFilter({onFiltersApplied}) {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                    <Typography className={classes.heading}>Filtros</Typography>
+                    <Typography clasyasName={classes.heading}>Filtros</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <div className={classes.root}>

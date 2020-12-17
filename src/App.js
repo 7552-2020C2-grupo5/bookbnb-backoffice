@@ -9,6 +9,7 @@ import Publication from "./components/views/Publication";
 import Login from "./components/views/Login";
 import Home from "./components/views/Home";
 import PrivateRoute from "./components/common/PrivateRoute";
+import NewAdmin from "./components/views/NewAdmin";
 
 export default function App() {
     const routes = app.routes();
@@ -21,6 +22,7 @@ export default function App() {
             <PrivateRoute exact path={routes.userProfile} component={UserProfile}/>
             <PrivateRoute exact path={routes.publications} component={PublicationsList}/>
             <PrivateRoute exact path={routes.publication} component={Publication}/>
+            <PrivateRoute exact path={routes.administrators} component={NewAdmin}/>
         </Router>
     );
 }

@@ -13,6 +13,7 @@ export default function PublicationsList() {
     const [publications, setPublications] = useState([]);
 
     const handleResponse = (responseData) => {
+        debugger;
         setPublications(responseData);
         setTimeout(() => setLoading(false), 1000);
     }

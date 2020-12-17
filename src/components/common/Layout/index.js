@@ -83,6 +83,7 @@ export default function Layout({content}) {
                 <List>
                     <MenuOption icon={PersonIcon} text={'Usuarios'} route={app.routes().users} />
                     <MenuOption icon={HouseIcon} text={'Publicaciones'} route={app.routes().publications} />
+                    <MenuOption icon={PersonIcon} text={'Alta de administrador'} route={app.routes().administrators} />
                 </List>
             </Drawer>
             <main

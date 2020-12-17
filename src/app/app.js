@@ -12,7 +12,8 @@ class App {
             users: '/users',
             userProfile: '/users/:id',
             publications: '/publications',
-            publication: '/publications/:id'
+            publication: '/publications/:id',
+            administrators: '/administrators'
         }
     }
 

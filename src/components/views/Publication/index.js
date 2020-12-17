@@ -9,21 +9,22 @@ import {PublicationImages} from "./PublicationImages";
 import {PublicationInfo} from "./PublicationInfo";
 import {useStyles} from "./styles";
 import {PublicationTitle} from "./PublicationTitle";
+import {app} from "../../../app/app";
 
 export default function Publication(props) {
     const [publication, setPublication] = useState({});
     const [loading, setLoading] = useState(true);
     const classes = useStyles();
 
-    const onResponse = (response) => {
-        setPublication(response.data);
+    const handleResponse = (response) => {
+        setPublication(response);
         setTimeout(() => setLoading(false), 1000);
     }
 
     useEffect(() => {
         setLoading(true);
-        axios.get("https://bookbnb5-publications.herokuapp.com/v1/publication/" + props.match.params.id)
-            .then(onResponse);
+        app.apiClient().getPublication(props.match.params.id)
+            .then(handleResponse);
     }, [props.match.params.id]);
 
     const publicationImages = () => {

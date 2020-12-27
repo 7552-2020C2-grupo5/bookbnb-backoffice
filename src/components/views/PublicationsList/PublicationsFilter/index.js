@@ -47,7 +47,7 @@ export function PublicationsFilter({onFiltersApplied}) {
                                               value={filters.beds} name="beds" type="number"/>
                                 <NumericField variant="outlined" label="Baños" onChange={handleInputChange}
                                               value={filters.bathrooms} name="bathrooms" type="number"/>
-                                <NumericField variant="outlined" label="Precio por noche" onChange={handleInputChange}
+                                <NumericField variant="outlined" label="Max. precio por noche" onChange={handleInputChange}
                                               value={filters.price_per_night} name="price_per_night" type="text"
                                               prefix="$"/>
                             </Box>

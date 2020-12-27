@@ -19,7 +19,7 @@ export default function PublicationsList() {
     }
 
     const getPublications = useCallback((filters={}) => {
-        app.apiClient().publications(filters).then(handleResponse)
+        app.apiClient().publications(filters).then(handleResponse);
     }, []);
 
     useEffect(() => {
@@ -29,11 +29,12 @@ export default function PublicationsList() {
 
     const columns = () => {
         return ([{field: 'title', type: 'text', headerName: 'Título', width: "20%"},
-            {field: 'description', type: 'text', headerName: 'Descripción', width: "30%"},
+            {field: 'description', type: 'text', headerName: 'Descripción', width: "25%"},
             {field: 'rooms', type: 'text', headerName: 'Habitaciones', width: "5%"},
             {field: 'beds', type: 'text', headerName: 'Camas', width: "5%"},
             {field: 'bathrooms', type: 'text', headerName: 'Baños', width: "5%"},
-            {field: 'price_per_night', type: 'text', headerName: 'Precio por noche', width: "15%"},
+            {field: 'price_per_night', type: 'text', headerName: 'Precio por noche', width: "10%"},
+            {field: 'publication_date', type: 'date', headerName: 'Fecha de publicación', width: "10%"},
             {field: 'id', type: 'actions', headerName: 'Acciones', width: "20%"}
         ])
     };

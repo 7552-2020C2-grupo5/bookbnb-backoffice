@@ -10,6 +10,7 @@ import Loader from "../../common/Loader";
 import UserData from "./UserData";
 import {useStyles} from "./styles";
 import {app} from "../../../app/app";
+import {getDateStringFrom} from "../../../utils";
 
 
 export default function UserProfile(props) {
@@ -42,7 +43,8 @@ export default function UserProfile(props) {
                     </CardContent>
                     <Divider/>
                     <CardContent>
-                        <UserData name={user.first_name} surname={user.last_name} email={user.email}/>
+                        <UserData name={user.first_name} surname={user.last_name} email={user.email}
+                                  registerDate={getDateStringFrom(user.register_date)}/>
                     </CardContent>
                 </Card>
             </Container>

@@ -10,6 +10,7 @@ import {PublicationInfo} from "./PublicationInfo";
 import {useStyles} from "./styles";
 import {PublicationTitle} from "./PublicationTitle";
 import {app} from "../../../app/app";
+import {getDateStringFrom} from "../../../utils";
 
 export default function Publication(props) {
     const [publication, setPublication] = useState({});
@@ -28,12 +29,16 @@ export default function Publication(props) {
     }, [props.match.params.id]);
 
     const publicationImages = () => {
-        const images = [
-            'https://i2.wp.com/www.arquitour.com/wp-content/uploads/2009/02/calamuchita-20.jpg?w=749&h=891&crop',
-            'https://i2.wp.com/www.arquitour.com/wp-content/uploads/2009/02/calamuchita-7.jpg?resize=590%2C391'
-        ]
+        const images = [];
+        for (const image of publication.images) {
+            images.push(image.url);
+        }
         return images;
     };
+
+    const publicationDate = () => {
+        return getDateStringFrom(publication.publication_date);
+    }
 
     const content = () => {
         if (loading) {
@@ -54,7 +59,9 @@ export default function Publication(props) {
                     <CardContent>
                         <PublicationInfo bathrooms={publication.bathrooms} beds={publication.beds}
                                          pricePerNight={publication.price_per_night} rooms={publication.rooms}
-                                         description={publication.description}/>
+                                         description={publication.description} publishDate={publicationDate()}
+                                         latitude={publication.loc.latitude} longitude={publication.loc.longitude}
+                        />
                     </CardContent>
                 </Card>
             </Container>

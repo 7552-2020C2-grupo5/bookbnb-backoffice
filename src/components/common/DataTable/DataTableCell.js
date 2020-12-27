@@ -5,6 +5,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import BlockIcon from "@material-ui/icons/Block";
 import TableCell from "@material-ui/core/TableCell";
 import React from "react";
+import {getDateStringFrom} from "../../../utils";
 
 export function DataTableCell({row, column, urlViewElement, handleClickBlock}) {
     const renderActions = () => {
@@ -28,9 +29,15 @@ export function DataTableCell({row, column, urlViewElement, handleClickBlock}) {
         return (row[column.field])
     };
 
+    const renderDate = () => {
+        return (getDateStringFrom(row[column.field]));
+    }
+
     const content = () => {
         if (column.type === 'actions') {
             return renderActions();
+        } else if (column.type === 'date') {
+            return renderDate();
         } else {
             return renderText();
         }

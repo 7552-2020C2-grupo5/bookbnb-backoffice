@@ -18,15 +18,14 @@ export default function UserProfile(props) {
     const [loading, setLoading] = useState(true);
     const classes = useStyles();
 
-    const handleResponse = (responseData) => {
-        debugger;
-        setUser(responseData);
-        setTimeout(() => setLoading(false), 1000);
+    const handleResponse = (response) => {
+        setUser(response.content());
+        setLoading(false);
     }
 
     useEffect(() => {
         setLoading(true);
-        app.apiClient().profileData({id: props.match.params.id}).then(handleResponse);
+        app.apiClient().profileData(props.match.params.id, handleResponse);
     }, [props.match.params.id]);
 
     const content = () => {

@@ -12,15 +12,15 @@ export default function UsersList() {
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
 
-    const handleResponse = (responseData) => {
-        setUsers(responseData);
-        setTimeout(() => setLoading(false), 1000);
+    const handleResponse = (response) => {
+        setUsers(response.content());
+        setLoading(false);
     }
 
     // When the user enters the screen, the
     useEffect(() => {
         setLoading(true);
-        app.apiClient().users().then(handleResponse)
+        app.apiClient().getUsers(handleResponse)
     }, []);
 
     const columns = () => {

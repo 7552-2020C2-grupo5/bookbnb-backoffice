@@ -18,14 +18,13 @@ export default function Publication(props) {
     const classes = useStyles();
 
     const handleResponse = (response) => {
-        setPublication(response);
-        setTimeout(() => setLoading(false), 1000);
+        setPublication(response.content());
+        setLoading(false);
     }
 
     useEffect(() => {
         setLoading(true);
-        app.apiClient().getPublication(props.match.params.id)
-            .then(handleResponse);
+        app.apiClient().getPublication(props.match.params.id, handleResponse);
     }, [props.match.params.id]);
 
     const publicationImages = () => {

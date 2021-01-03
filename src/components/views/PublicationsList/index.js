@@ -12,14 +12,13 @@ export default function PublicationsList() {
     const [loading, setLoading] = useState(false);
     const [publications, setPublications] = useState([]);
 
-    const handleResponse = (responseData) => {
-        debugger;
-        setPublications(responseData);
-        setTimeout(() => setLoading(false), 1000);
+    const handleResponse = (response) => {
+        setPublications(response.content());
+        setLoading(false);
     }
 
-    const getPublications = useCallback((filters={}) => {
-        app.apiClient().publications(filters).then(handleResponse);
+    const getPublications = useCallback((filters=undefined) => {
+        app.apiClient().publications(handleResponse, filters);
     }, []);
 
     useEffect(() => {

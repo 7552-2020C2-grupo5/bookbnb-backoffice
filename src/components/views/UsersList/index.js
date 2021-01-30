@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Layout from "../../common/Layout";
 import Loader from "../../common/Loader";
 import {DataTable} from "../../common/DataTable";
@@ -17,11 +17,20 @@ export default function UsersList() {
         setLoading(false);
     }
 
+    const blockUser = useCallback((userId) => {
+        app.apiClient().blockUser(userId, getUsers);
+    }, []);
+
+    const getUsers = useCallback((filters=undefined) => {
+        app.apiClient().getUsers(handleResponse)
+    }, []);
+
+
     // When the user enters the screen, the
     useEffect(() => {
         setLoading(true);
-        app.apiClient().getUsers(handleResponse)
-    }, []);
+        getUsers();
+    }, [getUsers]);
 
     const columns = () => {
         return ([{field: 'first_name', type: 'text', headerName: 'Nombre', width: "20%"},
@@ -43,7 +52,9 @@ export default function UsersList() {
                 <DataTable rows={users} columns={columns()}
                            modalTitle={"¿Está seguro que desea bloquear al usuario?"}
                            modalDescription={"Un usuario bloqueado no podrá acceder a la plataforma"}
-                           urlViewElement={app.routes().users + '/'}/>
+                           urlViewElement={app.routes().users + '/'}
+                           handleBlock={blockUser}
+                />
             </Container>
         );
     }

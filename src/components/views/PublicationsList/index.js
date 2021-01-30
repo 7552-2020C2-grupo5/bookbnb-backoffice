@@ -17,7 +17,13 @@ export default function PublicationsList() {
         setLoading(false);
     }
 
+    const blockPublication = useCallback((publicationId) => {
+        debugger;
+        app.apiClient().blockPublication(publicationId, getPublications);
+    }, []);
+
     const getPublications = useCallback((filters=undefined) => {
+        debugger;
         app.apiClient().publications(handleResponse, filters);
     }, []);
 
@@ -51,7 +57,9 @@ export default function PublicationsList() {
                 <DataTable rows={publications} columns={columns()}
                            modalTitle={"¿Está seguro que desea bloquear la publicación?"}
                            modalDescription={"No se podrá acceder ni reservar una publicación bloqueada."}
-                           urlViewElement={app.routes().publications + '/'}/>
+                           urlViewElement={app.routes().publications + '/'}
+                           handleBlock={blockPublication}
+                />
             </Container>
         );
     }

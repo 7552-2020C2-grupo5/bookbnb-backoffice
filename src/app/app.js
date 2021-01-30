@@ -15,7 +15,9 @@ class App {
             userProfile: '/users/:id',
             publications: '/publications',
             publication: '/publications/:id',
-            administrators: '/administrators'
+            admins: '/admins',
+            newAdmin: '/admins/new',
+            adminProfile: '/admins/:id'
         }
     }
 

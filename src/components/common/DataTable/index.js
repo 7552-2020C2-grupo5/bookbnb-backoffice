@@ -18,13 +18,19 @@ export function DataTable({rows, columns, urlViewElement, handleBlock, modalDesc
 
     const handleClickBlock = (event) => {
         let button = event.currentTarget;
-        console.log(button.id);
         setSelectedElementId(button.id);
         setOpenDialog(true);
     };
 
+    const showBlockOption = () => {
+        return handleBlock !== undefined;
+    }
+
     const handleConfirmBlock = () => {
-        // handleBlock();
+        debugger;
+        if (handleBlock) {
+            handleBlock(selectedElementId);
+        }
         console.log(selectedElementId);
         setOpenDialog(false);
     }
@@ -48,6 +54,7 @@ export function DataTable({rows, columns, urlViewElement, handleBlock, modalDesc
                 {columns.map((column) =>
                     <DataTableCell row={row}
                                    column={column}
+                                   showBlockOption={showBlockOption()}
                                    handleClickBlock={handleClickBlock}
                                    urlViewElement={urlViewElement}/>)}
             </TableRow>
@@ -78,11 +85,16 @@ export function DataTable({rows, columns, urlViewElement, handleBlock, modalDesc
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
             />
-            <ConfirmationModal isOpen={openDialog}
-                               handleCancel={handleClose}
-                               description={modalDescription}
-                               title={modalTitle}
-                               handleConfirmation={handleConfirmBlock}/>
+            {showBlockOption() ?
+                <ConfirmationModal isOpen={openDialog}
+                                   handleCancel={handleClose}
+                                   description={modalDescription}
+                                   title={modalTitle}
+                                   handleConfirmation={handleConfirmBlock}/>
+                                   :
+                <React.Fragment/>
+            }
+
         </Container>
     );
 }

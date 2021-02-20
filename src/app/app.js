@@ -1,4 +1,3 @@
-import {Requester} from "../server-requester/requester";
 import ApiClient from "../server-requester/client/ApiClient";
 import RemoteRequester from "../server-requester/requester/RemoteRequester";
 

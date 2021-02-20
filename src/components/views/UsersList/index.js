@@ -2,7 +2,6 @@ import React, {useCallback, useEffect, useState} from 'react';
 import Layout from "../../common/Layout";
 import Loader from "../../common/Loader";
 import {DataTable} from "../../common/DataTable";
-import axios from "axios";
 import {app} from "../../../app/app";
 import {Container} from "@material-ui/core";
 import SectionTitle from "../../common/SectionTitle";
@@ -17,16 +16,14 @@ export default function UsersList() {
         setLoading(false);
     }
 
-    const blockUser = useCallback((userId) => {
-        app.apiClient().blockUser(userId, getUsers);
-    }, []);
-
     const getUsers = useCallback((filters=undefined) => {
         app.apiClient().getUsers(handleResponse)
     }, []);
 
+    const blockUser = useCallback((userId) => {
+        app.apiClient().blockUser(userId, getUsers);
+    }, [getUsers]);
 
-    // When the user enters the screen, the
     useEffect(() => {
         setLoading(true);
         getUsers();

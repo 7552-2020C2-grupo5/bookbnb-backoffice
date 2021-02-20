@@ -27,11 +27,9 @@ export function DataTable({rows, columns, urlViewElement, handleBlock, modalDesc
     }
 
     const handleConfirmBlock = () => {
-        debugger;
         if (handleBlock) {
             handleBlock(selectedElementId);
         }
-        console.log(selectedElementId);
         setOpenDialog(false);
     }
 

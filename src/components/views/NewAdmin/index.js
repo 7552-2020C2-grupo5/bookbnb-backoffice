@@ -4,7 +4,6 @@ import {CardContent, TextField} from "@material-ui/core";
 import React, {useState} from "react";
 import Layout from "../../common/Layout";
 import SectionTitle from "../../common/SectionTitle";
-import NumericField from "../../common/NumericField";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Button from "@material-ui/core/Button";
 

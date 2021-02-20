@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {app} from "../../../../app/app";
-import {DataTable} from "../../../common/DataTable";
-import SectionTitle from "../../../common/SectionTitle";
+import {app} from "../../../app/app";
+import {DataTable} from "../../common/DataTable";
+import SectionTitle from "../../common/SectionTitle";
 import Container from "@material-ui/core/Container";
-import Loader from "../../../common/Loader";
-import Layout from "../../../common/Layout";
+import Loader from "../../common/Loader";
+import Layout from "../../common/Layout";
 
 
 export default function AdminsList() {

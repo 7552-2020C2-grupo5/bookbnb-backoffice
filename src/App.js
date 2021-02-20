@@ -10,7 +10,7 @@ import Login from "./components/views/Login";
 import Home from "./components/views/Home";
 import PrivateRoute from "./components/common/PrivateRoute";
 import NewAdmin from "./components/views/NewAdmin";
-import AdminsList from "./components/views/PublicationsList/AdminsList";
+import AdminsList from "./components/views/AdminsList";
 
 export default function App() {
     const routes = app.routes();

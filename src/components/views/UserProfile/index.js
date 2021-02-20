@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import Layout from "../../common/Layout";
-import axios from "axios";
 import Card from "@material-ui/core/Card";
 import Divider from "@material-ui/core/Divider";
 import CardContent from "@material-ui/core/CardContent";

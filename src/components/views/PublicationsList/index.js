@@ -17,15 +17,15 @@ export default function PublicationsList() {
         setLoading(false);
     }
 
-    const blockPublication = useCallback((publicationId) => {
-        debugger;
-        app.apiClient().blockPublication(publicationId, getPublications);
-    }, []);
-
     const getPublications = useCallback((filters=undefined) => {
         debugger;
         app.apiClient().publications(handleResponse, filters);
     }, []);
+
+    const blockPublication = useCallback((publicationId) => {
+        debugger;
+        app.apiClient().blockPublication(publicationId, getPublications);
+    }, [getPublications]);
 
     useEffect(() => {
         setLoading(true);

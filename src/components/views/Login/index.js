@@ -14,7 +14,7 @@ import {app} from "../../../app/app";
 import Layout from "../../common/Layout";
 
 export default function Login() {
-    const [userInfo, setUserInfo] = useState({mail: '', password: ''});
+    const [userInfo, setUserInfo] = useState({email: '', password: ''});
     const [notification, setNotification] = useState({message: "", isError: false, open: false});
     let history = useHistory();
     const classes = useStyles();
@@ -40,9 +40,7 @@ export default function Login() {
     };
 
     const handleClick = () => {
-        app.loginUser("token");
-        history.push(app.routes().home);
-        // app.apiClient().loginAdmin(userInfo, handleResponse);
+        app.apiClient().loginAdmin(userInfo, handleResponse);
     };
 
     return (
@@ -53,13 +51,13 @@ export default function Login() {
                     <CardContent>
                         <Typography variant="h5">Iniciar sesión</Typography>
                         <form noValidate>
-                            <TextField required fullWidth margin="normal" id="username" label="Usuario"
-                                       variant="outlined" onChange={handleInputChange} value={userInfo.mail}/>
+                            <TextField required fullWidth margin="normal" id="email" label="Mail"
+                                       variant="outlined" onChange={handleInputChange}/>
                             <TextField required fullWidth margin="normal" id="password" label="Contraseña"
-                                type="password" variant="outlined" onChange={handleInputChange} value={userInfo.password}/>
+                                type="password" variant="outlined" onChange={handleInputChange}/>
 
-                            <Notification open={notification.open} notification={notification}
-                                          onNotificationClosed={onNotificationClosed}/>
+                            <Notification open={notification.open} message={notification.message}
+                                          isError={notification.isError} onNotificationClosed={onNotificationClosed}/>
 
                             <Button fullWidth margin="normal" color="primary" variant="contained" onClick={handleClick}>
                                 Ingresar

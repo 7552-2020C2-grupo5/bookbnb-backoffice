@@ -60,9 +60,9 @@ export default function NewAdmin() {
                     <CardContent>
                         <form className={classes.form} noValidate>
                             <TextField variant="outlined" label="Nombre" onChange={handleInputChange}
-                                          value={administratorData.firstName} name="first_name" required/>
+                                          value={administratorData.first_name} name="first_name" required/>
                             <TextField variant="outlined" label="Apellido" onChange={handleInputChange}
-                                       value={administratorData.lastName} name="last_name" required/>
+                                       value={administratorData.last_name} name="last_name" required/>
                             <TextField variant="outlined" label="Email" onChange={handleInputChange}
                                        value={administratorData.email} name="email" required/>
                             <TextField variant="outlined" label="Password" onChange={handleInputChange}
@@ -81,6 +81,6 @@ export default function NewAdmin() {
     };
 
     return (
-        <Layout content={content()}  notification={notification} onNotificationClosed={onNotificationClosed}/>
+        <Layout content={content()} notification={notification} onNotificationClosed={onNotificationClosed}/>
     );
 }

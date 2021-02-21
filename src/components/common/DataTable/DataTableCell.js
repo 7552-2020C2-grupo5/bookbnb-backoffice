@@ -7,7 +7,7 @@ import TableCell from "@material-ui/core/TableCell";
 import React from "react";
 import {getDateStringFrom} from "../../../utils";
 
-export function DataTableCell({row, column, urlViewElement, handleClickBlock}) {
+export function DataTableCell({row, column, urlViewElement, handleClickBlock, showBlockOption}) {
     const renderActions = () => {
         return (
             <div>
@@ -16,11 +16,16 @@ export function DataTableCell({row, column, urlViewElement, handleClickBlock}) {
                         <VisibilityIcon/>
                     </IconButton>
                 </Tooltip>
-                <Tooltip title={"Bloquear"}>
-                    <IconButton onClick={handleClickBlock} color="secondary" id={row[column.field]}>
-                        <BlockIcon/>
-                    </IconButton>
-                </Tooltip>
+                {showBlockOption ?
+                    <Tooltip title={"Bloquear"}>
+                        <IconButton onClick={handleClickBlock} color="secondary" id={row[column.field]}>
+                            <BlockIcon/>
+                        </IconButton>
+                    </Tooltip>
+                    :
+                    <React.Fragment/>
+                }
+
             </div>
         )
     };

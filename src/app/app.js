@@ -1,8 +1,9 @@
-import {Requester} from "../server-requester/requester";
+import ApiClient from "../server-requester/client/ApiClient";
+import RemoteRequester from "../server-requester/requester/RemoteRequester";
 
 class App {
     constructor() {
-        this._apiClient = new Requester();
+        this._apiClient = new ApiClient(new RemoteRequester());
     }
 
     routes() {
@@ -13,7 +14,9 @@ class App {
             userProfile: '/users/:id',
             publications: '/publications',
             publication: '/publications/:id',
-            administrators: '/administrators'
+            admins: '/admins',
+            newAdmin: '/admins/new',
+            adminProfile: '/admins/:id'
         }
     }
 

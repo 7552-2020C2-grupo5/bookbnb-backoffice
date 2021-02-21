@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import Layout from "../../common/Layout";
-import axios from "axios";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Container from "@material-ui/core/Container";
@@ -18,14 +17,13 @@ export default function Publication(props) {
     const classes = useStyles();
 
     const handleResponse = (response) => {
-        setPublication(response);
-        setTimeout(() => setLoading(false), 1000);
+        setPublication(response.content());
+        setLoading(false);
     }
 
     useEffect(() => {
         setLoading(true);
-        app.apiClient().getPublication(props.match.params.id)
-            .then(handleResponse);
+        app.apiClient().getPublication(props.match.params.id, handleResponse);
     }, [props.match.params.id]);
 
     const publicationImages = () => {

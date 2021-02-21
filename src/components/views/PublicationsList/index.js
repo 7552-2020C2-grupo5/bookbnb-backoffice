@@ -11,16 +11,28 @@ import {PublicationsFilter} from "./PublicationsFilter";
 export default function PublicationsList() {
     const [loading, setLoading] = useState(false);
     const [publications, setPublications] = useState([]);
+    const [notification, setNotification] = useState({message: "", isError: false, open: false});
 
-    const handleResponse = (responseData) => {
-        debugger;
-        setPublications(responseData);
-        setTimeout(() => setLoading(false), 1000);
+    const onNotificationClosed = () => {
+        setNotification({...notification, open: false})
+    };
+
+    const handleResponse = (response) => {
+        if (response.hasError()) {
+            setNotification({message: response.description(), isError: true, open: true});
+        } else {
+            setPublications(response.content());
+        }
+        setLoading(false);
     }
 
-    const getPublications = useCallback((filters={}) => {
-        app.apiClient().publications(filters).then(handleResponse);
+    const getPublications = useCallback((filters=undefined) => {
+        app.apiClient().publications(handleResponse, filters);
     }, []);
+
+    const blockPublication = useCallback((publicationId) => {
+        app.apiClient().blockPublication(publicationId, getPublications);
+    }, [getPublications]);
 
     useEffect(() => {
         setLoading(true);
@@ -36,7 +48,7 @@ export default function PublicationsList() {
             {field: 'price_per_night', type: 'text', headerName: 'Precio por noche', width: "10%"},
             {field: 'publication_date', type: 'date', headerName: 'Fecha de publicación', width: "10%"},
             {field: 'id', type: 'actions', headerName: 'Acciones', width: "20%"}
-        ])
+        ]);
     };
 
     const content = () => {
@@ -52,12 +64,14 @@ export default function PublicationsList() {
                 <DataTable rows={publications} columns={columns()}
                            modalTitle={"¿Está seguro que desea bloquear la publicación?"}
                            modalDescription={"No se podrá acceder ni reservar una publicación bloqueada."}
-                           urlViewElement={app.routes().publications + '/'}/>
+                           urlViewElement={app.routes().publications + '/'}
+                           handleBlock={blockPublication}
+                />
             </Container>
         );
     }
 
     return (
-        <Layout content={content()}/>
+        <Layout content={content()} notification={notification} onNotificationClosed={onNotificationClosed}/>
     );
 }

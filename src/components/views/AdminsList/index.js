@@ -1,16 +1,24 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import Layout from "../../common/Layout";
-import Loader from "../../common/Loader";
-import {DataTable} from "../../common/DataTable";
 import {app} from "../../../app/app";
-import {Container} from "@material-ui/core";
+import {DataTable} from "../../common/DataTable";
 import SectionTitle from "../../common/SectionTitle";
+import Container from "@material-ui/core/Container";
+import Loader from "../../common/Loader";
+import Layout from "../../common/Layout";
+import {Fab} from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
+import {useHistory} from "react-router-dom";
 
 
-export default function UsersList() {
+export default function AdminsList() {
     const [loading, setLoading] = useState(false);
-    const [users, setUsers] = useState([]);
+    const [admins, setAdmins] = useState([]);
     const [notification, setNotification] = useState({message: "", isError: false, open: false});
+    const history = useHistory();
+
+    const onAddButtonClick = () => {
+        history.push(app.routes().newAdmin);
+    };
 
     const onNotificationClosed = () => {
         setNotification({...notification, open: false})
@@ -20,23 +28,21 @@ export default function UsersList() {
         if (response.hasError()) {
             setNotification({message: response.description(), isError: true, open: true});
         } else {
-            setUsers(response.content());
+            setAdmins(response.content());
         }
         setLoading(false);
     }
 
-    const getUsers = useCallback((filters=undefined) => {
-        app.apiClient().getUsers(handleResponse)
+    const getAdmins = useCallback((filters=undefined) => {
+        app.apiClient().getAdmins(handleResponse)
     }, []);
 
-    const blockUser = useCallback((userId) => {
-        app.apiClient().blockUser(userId, getUsers);
-    }, [getUsers]);
 
+    // When the user enters the screen, the
     useEffect(() => {
         setLoading(true);
-        getUsers();
-    }, [getUsers]);
+        getAdmins();
+    }, [getAdmins]);
 
     const columns = () => {
         return ([{field: 'first_name', type: 'text', headerName: 'Nombre', width: "20%"},
@@ -54,18 +60,18 @@ export default function UsersList() {
         }
         return(
             <Container>
-                <SectionTitle title="Listado de usuarios" />
-                <DataTable rows={users} columns={columns()}
-                           modalTitle={"¿Está seguro que desea bloquear al usuario?"}
-                           modalDescription={"Un usuario bloqueado no podrá acceder a la plataforma"}
-                           urlViewElement={app.routes().users + '/'}
-                           handleBlock={blockUser}
+                <SectionTitle title="Listado de administradores" />
+                <Fab color="primary" aria-label="add" onClick={onAddButtonClick}>
+                    <AddIcon />
+                </Fab>
+                <DataTable rows={admins} columns={columns()}
+                           urlViewElement={app.routes().admins + '/'}
                 />
             </Container>
         );
     }
 
     return (
-        <Layout content={content()} otification={notification} onNotificationClosed={onNotificationClosed}/>
+        <Layout content={content()} notification={notification} onNotificationClosed={onNotificationClosed}/>
     );
 }

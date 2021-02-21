@@ -6,7 +6,7 @@ function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function Notification({open, message, isError, closeNotification, }) {
+export default function Notification({open, message, isError, onNotificationClosed }) {
     const notificationType = () => {
         return (isError) ? "error": "success";
     };
@@ -15,7 +15,7 @@ export default function Notification({open, message, isError, closeNotification,
         if (reason === 'clickaway') {
             return;
         }
-        closeNotification();
+        onNotificationClosed();
     };
 
     return (

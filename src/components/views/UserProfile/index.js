@@ -17,6 +17,7 @@ export default function UserProfile(props) {
     const [loading, setLoading] = useState(true);
     const classes = useStyles();
 
+
     const handleResponse = (response) => {
         setUser(response.content());
         setLoading(false);

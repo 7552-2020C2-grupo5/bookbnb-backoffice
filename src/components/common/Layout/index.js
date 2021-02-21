@@ -19,13 +19,27 @@ import {useHistory} from 'react-router-dom';
 import {app} from "../../../app/app";
 import MenuOption from "./MenuOption";
 import {Button} from "@material-ui/core";
+import Notification from "../Notification";
 
 
-export default function Layout({content}) {
+export default function Layout({content, notification=undefined, onNotificationClosed=undefined}) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     let history = useHistory();
+
+    const handleCloseNotification = () => {
+        if (onNotificationClosed !== undefined) {
+            onNotificationClosed();
+        }
+    }
+
+    const notificationContent = () => {
+        if (notification !== undefined) {
+            return <Notification open={notification.open} message={notification.message}
+                                 isError={notification.isError} onNotificationClosed={handleCloseNotification}/>
+        }
+    };
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -93,6 +107,7 @@ export default function Layout({content}) {
             >
                 <div className={classes.drawerHeader} />
                 {content}
+                {notificationContent()}
             </main>
         </div>
     );

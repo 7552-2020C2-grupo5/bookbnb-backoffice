@@ -11,19 +11,26 @@ import {PublicationsFilter} from "./PublicationsFilter";
 export default function PublicationsList() {
     const [loading, setLoading] = useState(false);
     const [publications, setPublications] = useState([]);
+    const [notification, setNotification] = useState({message: "", isError: false, open: false});
+
+    const onNotificationClosed = () => {
+        setNotification({...notification, open: false})
+    };
 
     const handleResponse = (response) => {
-        setPublications(response.content());
+        if (response.hasError()) {
+            setNotification({message: response.description(), isError: true, open: true});
+        } else {
+            setPublications(response.content());
+        }
         setLoading(false);
     }
 
     const getPublications = useCallback((filters=undefined) => {
-        debugger;
         app.apiClient().publications(handleResponse, filters);
     }, []);
 
     const blockPublication = useCallback((publicationId) => {
-        debugger;
         app.apiClient().blockPublication(publicationId, getPublications);
     }, [getPublications]);
 
@@ -41,7 +48,7 @@ export default function PublicationsList() {
             {field: 'price_per_night', type: 'text', headerName: 'Precio por noche', width: "10%"},
             {field: 'publication_date', type: 'date', headerName: 'Fecha de publicación', width: "10%"},
             {field: 'id', type: 'actions', headerName: 'Acciones', width: "20%"}
-        ])
+        ]);
     };
 
     const content = () => {
@@ -65,6 +72,6 @@ export default function PublicationsList() {
     }
 
     return (
-        <Layout content={content()}/>
+        <Layout content={content()} notification={notification} onNotificationClosed={onNotificationClosed}/>
     );
 }

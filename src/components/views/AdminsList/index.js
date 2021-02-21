@@ -5,14 +5,31 @@ import SectionTitle from "../../common/SectionTitle";
 import Container from "@material-ui/core/Container";
 import Loader from "../../common/Loader";
 import Layout from "../../common/Layout";
+import {Fab} from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
+import {useHistory} from "react-router-dom";
 
 
 export default function AdminsList() {
     const [loading, setLoading] = useState(false);
     const [admins, setAdmins] = useState([]);
+    const [notification, setNotification] = useState({message: "", isError: false, open: false});
+    const history = useHistory();
+
+    const onAddButtonClick = () => {
+        history.push(app.routes().newAdmin);
+    };
+
+    const onNotificationClosed = () => {
+        setNotification({...notification, open: false})
+    };
 
     const handleResponse = (response) => {
-        setAdmins(response.content());
+        if (response.hasError()) {
+            setNotification({message: response.description(), isError: true, open: true});
+        } else {
+            setAdmins(response.content());
+        }
         setLoading(false);
     }
 
@@ -44,6 +61,9 @@ export default function AdminsList() {
         return(
             <Container>
                 <SectionTitle title="Listado de administradores" />
+                <Fab color="primary" aria-label="add" onClick={onAddButtonClick}>
+                    <AddIcon />
+                </Fab>
                 <DataTable rows={admins} columns={columns()}
                            urlViewElement={app.routes().admins + '/'}
                 />
@@ -52,6 +72,6 @@ export default function AdminsList() {
     }
 
     return (
-        <Layout content={content()}/>
+        <Layout content={content()} notification={notification} onNotificationClosed={onNotificationClosed}/>
     );
 }

@@ -10,9 +10,18 @@ import SectionTitle from "../../common/SectionTitle";
 export default function UsersList() {
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
+    const [notification, setNotification] = useState({message: "", isError: false, open: false});
+
+    const onNotificationClosed = () => {
+        setNotification({...notification, open: false})
+    };
 
     const handleResponse = (response) => {
-        setUsers(response.content());
+        if (response.hasError()) {
+            setNotification({message: response.description(), isError: true, open: true});
+        } else {
+            setUsers(response.content());
+        }
         setLoading(false);
     }
 
@@ -57,6 +66,6 @@ export default function UsersList() {
     }
 
     return (
-        <Layout content={content()}/>
+        <Layout content={content()} otification={notification} onNotificationClosed={onNotificationClosed}/>
     );
 }

@@ -6,6 +6,11 @@ export const useStyles = makeStyles((theme) => ({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+    },
     buttonContainer: {
         display: 'flex',
         justifyContent: 'flex-end'

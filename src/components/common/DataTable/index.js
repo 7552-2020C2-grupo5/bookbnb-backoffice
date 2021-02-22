@@ -11,8 +11,10 @@ import TablePagination from "@material-ui/core/TablePagination";
 import {ConfirmationModal} from "../ConfirmationModal";
 
 export function DataTable({rows, columns, urlViewElement, handleBlock, modalDescription, modalTitle}) {
+    const rowsPerPageOptions = [5, 10, 20];
+
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(1);
+    const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[0]);
     const [openDialog, setOpenDialog] = useState(false);
     const [selectedElementId, setSelectedElementId] = useState(undefined);
 
@@ -75,7 +77,7 @@ export function DataTable({rows, columns, urlViewElement, handleBlock, modalDesc
                 </Table>
             </TableContainer>
             <TablePagination
-                rowsPerPageOptions={[1, 5, 10]}
+                rowsPerPageOptions={rowsPerPageOptions}
                 component="div"
                 count={rows.length}
                 rowsPerPage={rowsPerPage}

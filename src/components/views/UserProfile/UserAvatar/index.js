@@ -7,6 +7,17 @@ import useStyles from "./styles";
 export default function UserAvatar({name, surname, avatarSrc}) {
     const classes = useStyles();
 
+    // const renderAvatar = () => {
+    //     if (avatarSrc !== "") {
+    //         return (
+    //             <Avatar
+    //                 className={classes.avatar}
+    //                 src={avatarSrc}
+    //             />
+    //         );
+    //     }
+    // };
+
     return (
         <Box className={classes.container}>
             <Avatar

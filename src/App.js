@@ -11,6 +11,7 @@ import Home from "./components/views/Home";
 import PrivateRoute from "./components/common/PrivateRoute";
 import NewAdmin from "./components/views/NewAdmin";
 import AdminsList from "./components/views/AdminsList";
+import AdminProfile from "./components/views/AdminProfile";
 
 export default function App() {
     const routes = app.routes();
@@ -25,6 +26,7 @@ export default function App() {
             <PrivateRoute exact path={routes.publication} component={Publication}/>
             <PrivateRoute exact path={routes.admins} component={AdminsList}/>
             <PrivateRoute exact path={routes.newAdmin} component={NewAdmin}/>
+            <PrivateRoute exact path={routes.adminProfile} component={AdminProfile}/>
         </Router>
     );
 }

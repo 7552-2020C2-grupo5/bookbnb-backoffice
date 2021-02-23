@@ -6,20 +6,26 @@ import {useStyles} from "./styles";
 
 export function PublicationImages({images}) {
     const classes = useStyles();
-    debugger;
+    if (images.length === 1) {
+        return (
+            <Box key={images[0]} className={classes.container}>
+                <img src={images[0]} alt="" className={classes.image}/>
+            </Box>
+        );
+    }
     if (images.length > 0) {
         return (
-            <Container>
+            <React.Fragment>
                 <Carousel autoPlay={false} navButtonsAlwaysVisible={true}>
                     {images.map((imgSrc) => {
                         return (
                             <Box key={imgSrc} className={classes.container}>
-                                <img src={imgSrc} alt="" className={classes.image}/>
+                                <img src={imgSrc}/>
                             </Box>
                         );
                     })}
                 </Carousel>
-            </Container>
+            </React.Fragment>
         );
     }
 }

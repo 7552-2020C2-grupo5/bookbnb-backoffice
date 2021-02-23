@@ -8,6 +8,8 @@ import Layout from "../../common/Layout";
 import {Fab} from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import {useHistory} from "react-router-dom";
+import {UsersFilter} from "../../common/UsersFilter";
+import {useStyles} from "./styles";
 
 
 export default function AdminsList() {
@@ -15,10 +17,22 @@ export default function AdminsList() {
     const [admins, setAdmins] = useState([]);
     const [notification, setNotification] = useState({message: "", isError: false, open: false});
     const history = useHistory();
+    const classes = useStyles();
+
+    const [filters, setFilters] = useState({
+        first_name: "",
+        last_name: "",
+        email: "",
+    });
 
     const onAddButtonClick = () => {
         history.push(app.routes().newAdmin);
     };
+
+    const handleFilterValueChanged = (name, value) => {
+        setFilters({...filters, [name]: value});
+    }
+
 
     const onNotificationClosed = () => {
         setNotification({...notification, open: false})
@@ -33,10 +47,14 @@ export default function AdminsList() {
         setLoading(false);
     }
 
-    const getAdmins = useCallback((filters=undefined) => {
-        app.apiClient().getAdmins(handleResponse)
+    const getAdmins = useCallback((filters= {}) => {
+        app.apiClient().getAdmins(handleResponse, filters)
     }, []);
 
+    const handleReload = useCallback(() => {
+        setLoading(true);
+        getAdmins(filters);
+    }, [getAdmins, filters]);
 
     // When the user enters the screen, the
     useEffect(() => {
@@ -61,12 +79,14 @@ export default function AdminsList() {
         return(
             <Container>
                 <SectionTitle title="Listado de administradores" />
-                <Fab color="primary" aria-label="add" onClick={onAddButtonClick}>
-                    <AddIcon />
-                </Fab>
+                <UsersFilter handleFiltersApplied={handleReload} filters={filters}
+                             handleValueChanged={handleFilterValueChanged}/>
                 <DataTable rows={admins} columns={columns()}
                            urlViewElement={app.routes().admins + '/'}
                 />
+                <Fab className={classes.fab} color="primary" aria-label="add" onClick={onAddButtonClick}>
+                    <AddIcon />
+                </Fab>
             </Container>
         );
     }

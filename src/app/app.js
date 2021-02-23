@@ -11,12 +11,12 @@ class App {
             login: '/login',
             home: '/',
             users: '/users',
-            userProfile: '/users/:id',
+            userProfile: '/users/:id(\\d+)',
             publications: '/publications',
-            publication: '/publications/:id',
+            publication: '/publications/:id(\\d+)',
             admins: '/admins',
             newAdmin: '/admins/new',
-            adminProfile: '/admins/:id'
+            adminProfile: '/admins/:id(\\d+)'
         }
     }
 

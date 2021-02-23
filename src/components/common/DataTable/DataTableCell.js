@@ -49,7 +49,7 @@ export function DataTableCell({row, column, urlViewElement, handleClickBlock, sh
     };
 
     return (
-        <TableCell key={row[column.field]}>
+        <TableCell>
             {content()}
         </TableCell>
     );

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import TableRow from "@material-ui/core/TableRow";
 import {DataTableCell} from "./DataTableCell";
-import {Container} from "@material-ui/core";
+import {Container, Paper} from "@material-ui/core";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -9,6 +9,18 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import TablePagination from "@material-ui/core/TablePagination";
 import {ConfirmationModal} from "../ConfirmationModal";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+
+const useStyles = makeStyles({
+    table: {
+        minWidth: 1000,
+    },
+    root: {
+        minWidth: 1200,
+        width: "100%",
+        overflowX: "auto"
+    }
+});
 
 export function DataTable({rows, columns, urlViewElement, handleBlock, modalDescription, modalTitle}) {
     const rowsPerPageOptions = [5, 10, 20];
@@ -17,6 +29,8 @@ export function DataTable({rows, columns, urlViewElement, handleBlock, modalDesc
     const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[0]);
     const [openDialog, setOpenDialog] = useState(false);
     const [selectedElementId, setSelectedElementId] = useState(undefined);
+
+    const classes = useStyles();
 
     const handleClickBlock = (event) => {
         let button = event.currentTarget;
@@ -50,9 +64,10 @@ export function DataTable({rows, columns, urlViewElement, handleBlock, modalDesc
 
     const createRow = (row) => {
         return (
-            <TableRow>
+            <TableRow key={row.id}>
                 {columns.map((column) =>
                     <DataTableCell row={row}
+                                   key={row.id + column.field}
                                    column={column}
                                    showBlockOption={showBlockOption()}
                                    handleClickBlock={handleClickBlock}
@@ -62,7 +77,8 @@ export function DataTable({rows, columns, urlViewElement, handleBlock, modalDesc
     };
 
     return (
-        <Container style={{display: 'flex', flexDirection: 'column', alignContent: 'center'}}>
+        // <Container style={{display: 'flex', flexDirection: 'column', alignContent: 'center'}}>
+        <Paper className={classes.root}>
             <TableContainer>
                 <Table>
                     <TableHead>
@@ -94,7 +110,7 @@ export function DataTable({rows, columns, urlViewElement, handleBlock, modalDesc
                                    :
                 <React.Fragment/>
             }
-
-        </Container>
+        </Paper>
+        // </Container>
     );
 }

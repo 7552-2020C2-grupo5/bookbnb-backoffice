@@ -51,7 +51,7 @@ export default function Publication(props) {
                         <PublicationTitle description={publication.description}
                                           title={publication.title}/>
                     </CardContent>
-                    <CardContent>
+                    <CardContent className={classes.images}>
                         <PublicationImages images={publicationImages()}/>
                     </CardContent>
                     <CardContent>

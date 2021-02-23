@@ -1,13 +1,12 @@
 import React, {useState} from "react";
 import Box from "@material-ui/core/Box";
-import {Accordion, AccordionActions, AccordionDetails, AccordionSummary} from "@material-ui/core";
+import {Accordion, AccordionActions, AccordionDetails, AccordionSummary, TextField} from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
-import NumericField from "../../../common/NumericField";
 import Button from "@material-ui/core/Button";
 import {useStyles} from "./styles";
 
-export function PublicationsFilter({filters, handleValueChanged, handleFiltersApplied}) {
+export function UsersFilter({filters, handleValueChanged, handleFiltersApplied}) {
     const classes = useStyles();
 
     const handleInputChange = (event) => {
@@ -28,15 +27,12 @@ export function PublicationsFilter({filters, handleValueChanged, handleFiltersAp
                     <div className={classes.form}>
                         <form>
                             <Box className={classes.filtersContainer}>
-                                <NumericField variant="outlined" label="Habitaciones" onChange={handleInputChange}
-                                              value={filters.rooms} name="rooms" type="number"/>
-                                <NumericField variant="outlined" label="Camas" onChange={handleInputChange}
-                                              value={filters.beds} name="beds" type="number"/>
-                                <NumericField variant="outlined" label="Baños" onChange={handleInputChange}
-                                              value={filters.bathrooms} name="bathrooms" type="number"/>
-                                <NumericField variant="outlined" label="Max. precio por noche" onChange={handleInputChange}
-                                              value={filters.price_per_night} name="price_per_night" type="text"
-                                              prefix="$"/>
+                                <TextField variant="outlined" label="Nombre" onChange={handleInputChange}
+                                           defaultValue={filters.first_name} name="first_name"/>
+                                <TextField variant="outlined" label="Apellido" onChange={handleInputChange}
+                                           defaultValue={filters.last_name} name="last_name"/>
+                                <TextField variant="outlined" label="Email" onChange={handleInputChange}
+                                           defaultValue={filters.email} name="email"/>
                             </Box>
                         </form>
                     </div>

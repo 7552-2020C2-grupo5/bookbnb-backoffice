@@ -6,12 +6,23 @@ import {app} from "../../../app/app";
 import {Container} from "@material-ui/core";
 import SectionTitle from "../../common/SectionTitle";
 import {PublicationsFilter} from "./PublicationsFilter";
+import {UsersFilter} from "../../common/UsersFilter";
 
 
 export default function PublicationsList() {
     const [loading, setLoading] = useState(false);
     const [publications, setPublications] = useState([]);
     const [notification, setNotification] = useState({message: "", isError: false, open: false});
+    const [filters, setFilters] = useState({
+        rooms: "",
+        beds: "",
+        bathrooms: "",
+        price_per_night: "",
+    });
+
+    const handleFilterValueChanged = (name, value) => {
+        setFilters({...filters, [name]: value});
+    }
 
     const onNotificationClosed = () => {
         setNotification({...notification, open: false})
@@ -26,9 +37,14 @@ export default function PublicationsList() {
         setLoading(false);
     }
 
-    const getPublications = useCallback((filters=undefined) => {
+    const getPublications = useCallback((filters= {}) => {
         app.apiClient().publications(handleResponse, filters);
     }, []);
+
+    const handleReload = useCallback(() => {
+        setLoading(true);
+        getPublications(filters);
+    }, [getPublications, filters]);
 
     const blockPublication = useCallback((publicationId) => {
         app.apiClient().blockPublication(publicationId, getPublications);
@@ -60,7 +76,8 @@ export default function PublicationsList() {
         return(
             <Container>
                 <SectionTitle title="Listado de publicaciones" />
-                <PublicationsFilter onFiltersApplied={getPublications}/>
+                <PublicationsFilter handleFiltersApplied={handleReload} filters={filters}
+                                    handleValueChanged={handleFilterValueChanged}/>
                 <DataTable rows={publications} columns={columns()}
                            modalTitle={"¿Está seguro que desea bloquear la publicación?"}
                            modalDescription={"No se podrá acceder ni reservar una publicación bloqueada."}

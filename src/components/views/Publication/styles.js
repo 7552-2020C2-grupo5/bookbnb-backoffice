@@ -6,4 +6,8 @@ export const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'center',
     },
+    images: {
+        display: "flex",
+        justifyContent: "center"
+    },
 }));

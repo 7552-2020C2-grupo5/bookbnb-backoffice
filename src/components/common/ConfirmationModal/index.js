@@ -5,10 +5,15 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import React from "react";
+import {useMediaQuery} from "@material-ui/core";
+import theme from "../../../theme";
 
 export function ConfirmationModal({isOpen, handleCancel, handleConfirmation, description, title}) {
+    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
     return (
         <Dialog
+            fullScreen={fullScreen}
             open={isOpen}
             onClose={handleCancel}
             aria-labelledby="alert-dialog-title"

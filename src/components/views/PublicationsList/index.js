@@ -6,7 +6,6 @@ import {app} from "../../../app/app";
 import {Container} from "@material-ui/core";
 import SectionTitle from "../../common/SectionTitle";
 import {PublicationsFilter} from "./PublicationsFilter";
-import {UsersFilter} from "../../common/UsersFilter";
 
 
 export default function PublicationsList() {
@@ -17,7 +16,8 @@ export default function PublicationsList() {
         rooms: "",
         beds: "",
         bathrooms: "",
-        price_per_night: "",
+        price_per_night_max: "",
+        price_per_night_min: "",
     });
 
     const handleFilterValueChanged = (name, value) => {

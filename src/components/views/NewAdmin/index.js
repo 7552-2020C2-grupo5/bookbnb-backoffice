@@ -1,16 +1,15 @@
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import {CardContent, TextField} from "@material-ui/core";
-import React, {useCallback, useState} from "react";
+import React, {useState} from "react";
 import Layout from "../../common/Layout";
 import SectionTitle from "../../common/SectionTitle";
-import makeStyles from "@material-ui/core/styles/makeStyles";
 import Button from "@material-ui/core/Button";
 import {useStyles} from "./styles";
 import {app} from "../../../app/app";
 import {useHistory} from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
+import {useForm} from "react-hook-form";
+import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
 export default function NewAdmin() {
@@ -31,6 +30,7 @@ export default function NewAdmin() {
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(schema)
     });
+
     const [notification, setNotification] = useState({message: "", isError: false, open: false});
     const classes = useStyles();
     const history = useHistory();

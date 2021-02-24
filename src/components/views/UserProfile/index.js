@@ -10,22 +10,33 @@ import UserData from "./UserData";
 import {useStyles} from "./styles";
 import {app} from "../../../app/app";
 import {getDateStringFrom} from "../../../utils";
+import Button from "@material-ui/core/Button";
+import {AddMoneyToWalletModal} from "./AddMoneyToWalletModal";
 
 
 export default function UserProfile(props) {
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
+    const [modalOpen, setModalOpen] = useState(false);
     const classes = useStyles();
 
 
-    const handleResponse = (response) => {
+    const handleResponseGetUser = (response) => {
         setUser(response.content());
         setLoading(false);
     }
 
+    const handleClickOpenModal = () => {
+        setModalOpen(true);
+    }
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    }
+
     useEffect(() => {
         setLoading(true);
-        app.apiClient().profileData(props.match.params.id, handleResponse);
+        app.apiClient().profileData(props.match.params.id, handleResponseGetUser);
     }, [props.match.params.id]);
 
     const content = () => {
@@ -45,7 +56,14 @@ export default function UserProfile(props) {
                         <UserData name={user.first_name} surname={user.last_name} email={user.email}
                                   registerDate={getDateStringFrom(user.register_date)}/>
                     </CardContent>
+                    <CardContent className={classes.buttonContainer}>
+                        <Button onClick={handleClickOpenModal} color="primary" variant="contained">
+                            Cargar Saldo
+                        </Button>
+                    </CardContent>
                 </Card>
+                <AddMoneyToWalletModal isOpen={modalOpen} handleCancel={handleCloseModal}
+                                       handleConfirmation={handleCloseModal}/>
             </Container>
         );
     }

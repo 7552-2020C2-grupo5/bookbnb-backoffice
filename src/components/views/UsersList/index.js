@@ -5,7 +5,6 @@ import {DataTable} from "../../common/DataTable";
 import {app} from "../../../app/app";
 import {Container} from "@material-ui/core";
 import SectionTitle from "../../common/SectionTitle";
-import {PublicationsFilter} from "../PublicationsList/PublicationsFilter";
 import {UsersFilter} from "../../common/UsersFilter";
 
 

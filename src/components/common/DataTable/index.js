@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import TableRow from "@material-ui/core/TableRow";
 import {DataTableCell} from "./DataTableCell";
-import {Container, Paper} from "@material-ui/core";
+import {Paper} from "@material-ui/core";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -13,10 +13,9 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles({
     table: {
-        minWidth: 1000,
+        minWidth: 400,
     },
     root: {
-        minWidth: 1200,
         width: "100%",
         overflowX: "auto"
     }

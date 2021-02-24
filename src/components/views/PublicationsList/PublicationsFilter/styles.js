@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'space-evenly',
+        justifyContent: 'flex-start',
         alignItems: 'center'
     },
     heading: {

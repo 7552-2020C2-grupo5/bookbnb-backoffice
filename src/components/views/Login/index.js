@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useState} from "react";
 import Card from "@material-ui/core/Card";
 import {CardContent} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
@@ -11,7 +11,6 @@ import {useHistory} from "react-router-dom";
 import {useStyles} from "./styles";
 import Notification from "../../common/Notification";
 import {app} from "../../../app/app";
-import Layout from "../../common/Layout";
 
 export default function Login() {
     const [userInfo, setUserInfo] = useState({email: '', password: ''});

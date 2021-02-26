@@ -74,12 +74,12 @@ export default function UsersList() {
                 <SectionTitle title="Listado de usuarios" />
                 <UsersFilter handleFiltersApplied={handleReload} filters={filters}
                              handleValueChanged={handleFilterValueChanged}/>
-                {/*<DataTable rows={users} columns={columns()}*/}
-                {/*           modalTitle={"¿Está seguro que desea bloquear al usuario?"}*/}
-                {/*           modalDescription={"Un usuario bloqueado no podrá acceder a la plataforma"}*/}
-                {/*           urlViewElement={app.routes().users + '/'}*/}
-                {/*           handleBlock={blockUser}*/}
-                {/*/>*/}
+                <DataTable rows={users} columns={columns()}
+                           modalTitle={"¿Está seguro que desea bloquear al usuario?"}
+                           modalDescription={"Un usuario bloqueado no podrá acceder a la plataforma"}
+                           urlViewElement={app.routes().users + '/'}
+                           handleBlock={blockUser}
+                />
             </Container>
         );
     }

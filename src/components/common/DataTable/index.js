@@ -76,7 +76,6 @@ export function DataTable({rows, columns, urlViewElement, handleBlock, modalDesc
     };
 
     return (
-        // <Container style={{display: 'flex', flexDirection: 'column', alignContent: 'center'}}>
         <Paper className={classes.root}>
             <TableContainer>
                 <Table>
@@ -110,6 +109,5 @@ export function DataTable({rows, columns, urlViewElement, handleBlock, modalDesc
                 <React.Fragment/>
             }
         </Paper>
-        // </Container>
     );
 }

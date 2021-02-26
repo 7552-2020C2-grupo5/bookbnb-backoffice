@@ -33,12 +33,16 @@ export default function Login() {
         if (response.hasError()) {
             setNotification({message: response.description(), isError: true, open: true});
         } else {
-            app.loginUser(response.content().token);
+            // app.loginUser(response.content().token);
+            //TODO: Descomentar la de arriba y comentar la de abajo
+            app.loginUser("AUTH_FAKE");
             history.push(app.routes().home);
         }
     };
 
     const handleClick = () => {
+        // app.loginUser("token");
+        // history.push(app.routes().home);
         app.apiClient().loginAdmin(userInfo, handleResponse);
     };
 

@@ -35,6 +35,7 @@ export default function UserProfile(props) {
     }
 
     useEffect(() => {
+        //TODO: Manejar errores
         setLoading(true);
         app.apiClient().profileData(props.match.params.id, handleResponseGetUser);
     }, [props.match.params.id]);

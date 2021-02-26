@@ -3,6 +3,7 @@ import RemoteRequester from "../server-requester/requester/RemoteRequester";
 
 class App {
     constructor() {
+        debugger;
         this._apiClient = new ApiClient(new RemoteRequester());
     }
 
@@ -21,10 +22,15 @@ class App {
     }
 
     apiClient() {
+        debugger;
+        if (this.thereIsLoggedInUser() && this._apiClient !== undefined && !this._apiClient.hasToken()) {
+            this._apiClient.setToken(localStorage.getItem("token"));
+        }
         return this._apiClient;
     }
 
     loginUser(token) {
+        this.apiClient().setToken(token);
         localStorage.setItem("token", token);
     }
 
@@ -35,6 +41,7 @@ class App {
     thereIsLoggedInUser() {
         return localStorage.getItem("token");
     }
+
 }
 
 export let app = new App();

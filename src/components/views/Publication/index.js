@@ -22,6 +22,7 @@ export default function Publication(props) {
     }
 
     useEffect(() => {
+        //TODO: Manejar errores
         setLoading(true);
         app.apiClient().getPublication(props.match.params.id, handleResponse);
     }, [props.match.params.id]);

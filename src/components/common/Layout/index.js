@@ -20,6 +20,7 @@ import MenuOption from "./MenuOption";
 import {Button, Hidden} from "@material-ui/core";
 import Notification from "../Notification";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import BarChartIcon from '@material-ui/icons/BarChart';
 // import useStyles from './styles'
 
 const drawerWidth = 240;
@@ -29,20 +30,20 @@ const useStyles = makeStyles((theme) => ({
         // display: 'flex',
     },
     drawer: {
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('lg')]: {
             width: drawerWidth,
             flexShrink: 0,
         },
     },
     appBar: {
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('lg')]: {
             width: `calc(100% - ${drawerWidth}px)`,
             marginLeft: drawerWidth,
         },
     },
     menuButton: {
         marginRight: theme.spacing(2),
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('lg')]: {
             display: 'none',
         },
     },
@@ -52,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
         width: drawerWidth,
     },
     content: {
-        [theme.breakpoints.up("sm")]: {
+        [theme.breakpoints.up('lg')]: {
             marginLeft: drawerWidth,
             width: `calc(100% - ${drawerWidth}px)`
         }
@@ -96,6 +97,7 @@ export default function Layout(props) {
             <div className={classes.toolbar} />
             <Divider />
             <List>
+                <MenuOption icon={BarChartIcon} text={'Métricas'} route={app.routes().home} />
                 <MenuOption icon={PersonIcon} text={'Usuarios'} route={app.routes().users} />
                 <MenuOption icon={HouseIcon} text={'Publicaciones'} route={app.routes().publications} />
                 <MenuOption icon={PersonIcon} text={'Administradores'} route={app.routes().admins} />
@@ -127,7 +129,7 @@ export default function Layout(props) {
             </AppBar>
             <nav className={classes.drawer} aria-label="mailbox folders">
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-                <Hidden smUp implementation="css">
+                <Hidden lgUp implementation="css">
                     <Drawer
                         container={container}
                         variant="temporary"
@@ -144,7 +146,7 @@ export default function Layout(props) {
                         {drawer}
                     </Drawer>
                 </Hidden>
-                <Hidden xsDown implementation="css">
+                <Hidden mdDown implementation="css">
                     <Drawer
                         classes={{
                             paper: classes.drawerPaper,

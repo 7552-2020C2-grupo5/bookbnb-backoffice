@@ -3,7 +3,6 @@ import RemoteRequester from "../server-requester/requester/RemoteRequester";
 
 class App {
     constructor() {
-        debugger;
         this._apiClient = new ApiClient(new RemoteRequester());
     }
 
@@ -22,7 +21,6 @@ class App {
     }
 
     apiClient() {
-        debugger;
         if (this.thereIsLoggedInUser() && this._apiClient !== undefined && !this._apiClient.hasToken()) {
             this._apiClient.setToken(localStorage.getItem("token"));
         }

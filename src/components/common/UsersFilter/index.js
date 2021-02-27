@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import {useStyles} from "./styles";
 
+
 export function UsersFilter({filters, handleValueChanged, handleFiltersApplied}) {
     const classes = useStyles();
 
@@ -21,7 +22,7 @@ export function UsersFilter({filters, handleValueChanged, handleFiltersApplied})
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                    <Typography clasyasName={classes.heading}>Filtros</Typography>
+                    <Typography className={classes.heading}>Filtros</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <div className={classes.form}>

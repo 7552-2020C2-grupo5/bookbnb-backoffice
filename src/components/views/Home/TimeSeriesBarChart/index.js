@@ -1,24 +1,26 @@
 import React from "react";
 import {Bar} from "react-chartjs-2";
+import {useStyles} from "../styles";
 
-export default function TimeSeriesBarChart(props) {
+export default function TimeSeriesBarChart({metricData, title, legendLabel, color="rgb(255,99,132)"}) {
+    const classes = useStyles();
+
     const data = {
-        labels: props.labels,
+        labels: metricData.labels,
         datasets: [
             {
-                label: props.legendLabel,
-                data: props.data,
-                backgroundColor: 'rgb(255,99,132)',
-                borderColor: 'rgba(255, 99, 132, 0.2)',
+                label: legendLabel,
+                data: metricData.data,
+                backgroundColor: color,
             },
         ],
     }
 
     const options = {
-        responsive: true,
         title: {
             display: true,
-            text: props.title,
+            text: title,
+            fontSize: 20
         },
         scales: {
             yAxes: [
@@ -43,11 +45,8 @@ export default function TimeSeriesBarChart(props) {
     }
 
     return (
-        <React.Fragment>
-            <div className='header'>
-                <h1 className='title'>{props.title}</h1>
-            </div>
+        <div className={classes.chart}>
             <Bar data={data} options={options} />
-        </React.Fragment>
+        </div>
     );
 }

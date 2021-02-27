@@ -1,16 +1,19 @@
 import React from "react";
 import {Line} from "react-chartjs-2";
+import {useStyles} from "../styles";
 
-export default function TimeSeriesLineChart(props) {
+export default function TimeSeriesLineChart({metricData, title, legendLabel, color="rgb(255,99,132)"}) {
+    const classes = useStyles();
+
     const data = {
-        labels: props.labels,
+        labels: metricData.labels,
         datasets: [
             {
-                label: props.legendLabel,
-                data: props.data,
+                label: legendLabel,
+                data: metricData.data,
                 fill: false,
-                backgroundColor: 'rgb(255,99,132)',
-                borderColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: color,
+                backgroundColor: color,
                 lineTension: 0
             },
         ],
@@ -19,7 +22,8 @@ export default function TimeSeriesLineChart(props) {
     const options = {
         title: {
             display: true,
-            text: props.title,
+            text: title,
+            fontSize: 20
         },
         scales: {
             yAxes: [
@@ -43,11 +47,8 @@ export default function TimeSeriesLineChart(props) {
     }
 
     return (
-        <React.Fragment>
-            <div className='header'>
-                <h1 className='title'>{props.title}</h1>
-            </div>
+        <div className={classes.chart}>
             <Line data={data} options={options} />
-        </React.Fragment>
+        </div>
     );
 }

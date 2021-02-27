@@ -22,7 +22,7 @@ export function PublicationsFilter({filters, handleValueChanged, handleFiltersAp
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                    <Typography clasyasName={classes.heading}>Filtros</Typography>
+                    <Typography className={classes.heading}>Filtros</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <div className={classes.form}>

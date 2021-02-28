@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Layout from "../../common/Layout";
 import Card from "@material-ui/core/Card";
 import Divider from "@material-ui/core/Divider";
@@ -29,6 +29,31 @@ export default function UserProfile(props) {
         setNotification({...notification, open: false})
     };
 
+    const handleClickOpenModal = () => {
+        setModalOpen(true);
+    }
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    }
+
+    const handleRechargeWalletResponse = (response) => {
+        handleCloseModal();
+        setNotification({message: response.description(),
+            isError: response.hasError(), open: true});
+        if (response.hasError()) {
+            setLoading(false);
+        } else {
+            reloadBalance();
+        }
+    }
+
+    const handleRechargeWalletConfirmation = (amount) => {
+        setLoading(true);
+        const accountMnemonic = ".."
+        app.apiClient().rechargeWallet(user.address, accountMnemonic, amount, handleRechargeWalletResponse);
+    }
+
     const handleResponseGetUser = (response) => {
         if (response.hasError()) {
             setNotification({message: response.description(),
@@ -40,23 +65,28 @@ export default function UserProfile(props) {
         setLoading(false);
     }
 
-    const handleClickOpenModal = () => {
-        setModalOpen(true);
+    const handleReloadBalance = (response) => {
+        if (!response.hasError()) {
+            const contentResponse = response.content();
+            setUser({...user, ...contentResponse});
+        }
+        setLoading(false);
     }
 
-    const handleAddMoneyToWallet = (response) => {
+    const reloadBalance = useCallback(() => {
+        app.apiClient().walletBalance(user.address, handleReloadBalance);
+    }, [user]);
 
-    }
 
-    const handleCloseModal = () => {
-        setModalOpen(false);
-    }
+    const getUser = useCallback(() => {
+        app.apiClient().profileData(props.match.params.id, handleResponseGetUser);
+    }, [props.match.params.id]);
 
     useEffect(() => {
         //TODO: Manejar errores
         setLoading(true);
-        app.apiClient().profileData(props.match.params.id, handleResponseGetUser);
-    }, [props.match.params.id]);
+        getUser();
+    }, [getUser]);
 
     const userProfileContent = () => {
         if (user !== undefined) {
@@ -82,11 +112,11 @@ export default function UserProfile(props) {
                         </CardContent>
                     </Card>
                     <AddMoneyToWalletModal isOpen={modalOpen} handleCancel={handleCloseModal}
-                                           handleConfirmation={handleCloseModal}/>
+                                           handleConfirmation={handleRechargeWalletConfirmation}/>
                 </React.Fragment>
             );
         }
-        return <Typography variant="h4">El usuario no existe o se encuentra bloqueado</Typography>
+        return <Typography variant="h4">No se pudo cargar el usuario</Typography>
     }
 
     const content = () => {

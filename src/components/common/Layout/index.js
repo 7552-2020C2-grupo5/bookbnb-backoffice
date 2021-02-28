@@ -91,7 +91,6 @@ export default function Layout(props) {
     };
 
     const handleClickLogout = () => {
-        debugger;
         app.apiClient().adminLogout(handleLogOut);
     }
 

@@ -69,7 +69,7 @@ export default function Publication(props) {
                 </Card>
             );
         }
-        return <Typography variant="h4">La publicación no existe o se encuentra bloqueada</Typography>
+        return <Typography variant="h4">No se pudo cargar la publicación</Typography>
     }
 
     const content = () => {

@@ -32,9 +32,8 @@ export function AddMoneyToWalletModal({isOpen, handleCancel, handleConfirmation}
     }
 
     const onSubmit = (data) => {
-        console.log(data);
         if (formIsValid()) {
-            handleConfirmation();
+            handleConfirmation(data.amount);
         }
     }
 

@@ -6,9 +6,6 @@ export default function UserBankInformation({walletAddress, moneyInEth, moneyInU
     return (
         <Grid container direction="row">
             <Grid item md={3} xs={12}>
-                <StaticField label='Wallet' value={walletAddress}/>
-            </Grid>
-            <Grid item md={3} xs={12}>
                 <StaticField label='ETH' value={moneyInEth}/>
             </Grid>
             <Grid item md={3} xs={12}>
@@ -16,6 +13,9 @@ export default function UserBankInformation({walletAddress, moneyInEth, moneyInU
             </Grid>
             <Grid item md={3} xs={12}>
                 <StaticField label='EUR' value={moneyInEur}/>
+            </Grid>
+            <Grid item md={3} xs={12}>
+                <StaticField label='Wallet' value={walletAddress}/>
             </Grid>
         </Grid>
     );

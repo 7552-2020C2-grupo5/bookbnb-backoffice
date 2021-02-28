@@ -22,7 +22,6 @@ class App {
     }
 
     apiClient() {
-        debugger;
         if (this._apiClient === undefined) {
             this._apiClient = new ApiClient(new RemoteRequester(), undefined, undefined,
                 this.logoutUser);

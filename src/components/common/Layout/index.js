@@ -21,6 +21,7 @@ import {Button, Hidden} from "@material-ui/core";
 import Notification from "../Notification";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import BarChartIcon from '@material-ui/icons/BarChart';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 // import useStyles from './styles'
 
 const drawerWidth = 240;
@@ -101,6 +102,7 @@ export default function Layout(props) {
                 <MenuOption icon={PersonIcon} text={'Usuarios'} route={app.routes().users} />
                 <MenuOption icon={HouseIcon} text={'Publicaciones'} route={app.routes().publications} />
                 <MenuOption icon={PersonIcon} text={'Administradores'} route={app.routes().admins} />
+                <MenuOption icon={MenuBookIcon} text={'Reservas'} route={app.routes().bookings} />
             </List>
         </div>
     );

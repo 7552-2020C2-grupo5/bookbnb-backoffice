@@ -16,7 +16,8 @@ class App {
             publication: '/publications/:id(\\d+)',
             admins: '/admins',
             newAdmin: '/admins/new',
-            adminProfile: '/admins/:id(\\d+)'
+            adminProfile: '/admins/:id(\\d+)',
+            bookings: '/bookings'
         }
     }
 

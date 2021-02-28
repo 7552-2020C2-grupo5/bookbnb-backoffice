@@ -10,6 +10,7 @@ import AddIcon from '@material-ui/icons/Add';
 import {useHistory} from "react-router-dom";
 import {UsersFilter} from "../../common/UsersFilter";
 import {useStyles} from "./styles";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 
 
 export default function AdminsList() {
@@ -66,7 +67,11 @@ export default function AdminsList() {
         return ([{field: 'first_name', type: 'text', headerName: 'Nombre', width: "20%"},
             {field: 'last_name', type: 'text', headerName: 'Apellido', width: "20%"},
             {field: 'email', type: 'text', headerName: 'Mail', width: "20%"},
-            {field: 'id', type: 'actions', headerName: 'Acciones', width: "20%"}
+            {field: 'id', type: 'actions', headerName: 'Acciones', width: "20%",
+                actions: [
+                    {type: "view", urlViewElement: app.routes().admins + '/', idField: 'id', icon: VisibilityIcon},
+                ]
+            }
         ])
     };
 
@@ -81,9 +86,7 @@ export default function AdminsList() {
                 <SectionTitle title="Listado de administradores" />
                 <UsersFilter handleFiltersApplied={handleReload} filters={filters}
                              handleValueChanged={handleFilterValueChanged}/>
-                <DataTable rows={admins} columns={columns()}
-                           urlViewElement={app.routes().admins + '/'}
-                />
+                <DataTable rows={admins} columns={columns()}/>
                 <Fab className={classes.fab} color="primary" aria-label="add" onClick={onAddButtonClick}>
                     <AddIcon />
                 </Fab>

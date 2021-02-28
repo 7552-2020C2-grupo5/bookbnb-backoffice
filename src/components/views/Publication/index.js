@@ -10,14 +10,23 @@ import {useStyles} from "./styles";
 import {PublicationTitle} from "./PublicationTitle";
 import {app} from "../../../app/app";
 import {getDateStringFrom} from "../../../utils";
+import Typography from "@material-ui/core/Typography";
 
 export default function Publication(props) {
-    const [publication, setPublication] = useState({});
+    const [publication, setPublication] = useState(undefined);
     const [loading, setLoading] = useState(true);
     const classes = useStyles();
+    const [notification, setNotification] = useState({message: "", isError: false, open: false});
+
 
     const handleResponse = (response) => {
-        setPublication(response.content());
+        if (response.hasError()) {
+            setNotification({message: response.description(),
+                isError: true, open: true});
+            setPublication(undefined);
+        } else {
+            setPublication(response.content());
+        }
         setLoading(false);
     }
 
@@ -39,14 +48,9 @@ export default function Publication(props) {
         return getDateStringFrom(publication.publication_date);
     }
 
-    const content = () => {
-        if (loading) {
-            return(
-                <Loader/>
-            );
-        }
-        return (
-            <Container>
+    const publicationContent = () => {
+        if (publication !== undefined) {
+            return (
                 <Card className={classes.root}>
                     <CardContent>
                         <PublicationTitle description={publication.description}
@@ -63,6 +67,20 @@ export default function Publication(props) {
                         />
                     </CardContent>
                 </Card>
+            );
+        }
+        return <Typography variant="h4">La publicación no existe o se encuentra bloqueada</Typography>
+    }
+
+    const content = () => {
+        if (loading) {
+            return(
+                <Loader/>
+            );
+        }
+        return (
+            <Container>
+                {publicationContent()}
             </Container>
         );
     }

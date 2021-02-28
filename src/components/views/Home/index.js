@@ -38,7 +38,7 @@ export default function Home() {
 
     const handleResponse = (response) => {
         if (response.hasError()) {
-            setNotification({message: response.description,
+            setNotification({message: response.description(),
                 isError: true, open: true});
             setMetrics(undefined)
         } else {

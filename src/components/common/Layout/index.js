@@ -61,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
     },
     appContent: {
         margin: 10
+    },
+    logout: {
+        float: "right"
     }
 }));
 
@@ -69,7 +72,6 @@ export default function Layout(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    let history = useHistory();
 
     const handleCloseNotification = () => {
         if (props.onNotificationClosed !== undefined) {
@@ -86,8 +88,12 @@ export default function Layout(props) {
 
     const handleLogOut = () => {
         app.logoutUser();
-        history.push("/")
     };
+
+    const handleClickLogout = () => {
+        debugger;
+        app.apiClient().adminLogout(handleLogOut);
+    }
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -126,7 +132,7 @@ export default function Layout(props) {
                     <Typography variant="h6" noWrap>
                         BookBnb
                     </Typography>
-                    <Button onClick={handleLogOut}>Cerrar sesión</Button>
+                    <Button onClick={handleClickLogout}>Cerrar sesión</Button>
                 </Toolbar>
             </AppBar>
             <nav className={classes.drawer} aria-label="mailbox folders">

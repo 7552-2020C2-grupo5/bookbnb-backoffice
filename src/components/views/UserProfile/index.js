@@ -57,6 +57,8 @@ export default function UserProfile(props) {
                         <UserData name={user.first_name} surname={user.last_name} email={user.email}
                                   registerDate={getDateStringFrom(user.register_date)}/>
                     </CardContent>
+                    <CardContent>
+                    </CardContent>
                     <CardContent className={classes.buttonContainer}>
                         <Button onClick={handleClickOpenModal} color="primary" variant="contained">
                             Cargar Saldo

@@ -3,7 +3,7 @@ import RemoteRequester from "../server-requester/requester/RemoteRequester";
 
 class App {
     constructor() {
-        this._apiClient = new ApiClient(new RemoteRequester());
+        this._apiClient = undefined;
     }
 
     routes() {
@@ -22,8 +22,13 @@ class App {
     }
 
     apiClient() {
-        if (this.thereIsLoggedInUser() && this._apiClient !== undefined && !this._apiClient.hasToken()) {
-            this._apiClient.setToken(localStorage.getItem("token"));
+        debugger;
+        if (this._apiClient === undefined) {
+            this._apiClient = new ApiClient(new RemoteRequester(), undefined, undefined,
+                this.logoutUser);
+        }
+        if (this.thereIsLoggedInUser() && !this._apiClient.hasToken()) {
+            this._apiClient.setToken(this.getUserToken());
         }
         return this._apiClient;
     }
@@ -35,6 +40,11 @@ class App {
 
     logoutUser(token) {
         localStorage.removeItem("token");
+        window.history.go();
+    }
+
+    getUserToken() {
+        return localStorage.getItem("token");
     }
 
     thereIsLoggedInUser() {

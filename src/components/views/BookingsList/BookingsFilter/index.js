@@ -7,7 +7,6 @@ import {PositiveIntegerField} from "../../../common/NumericField";
 
 export default function BookingsFilter({filters, handleValueChanged, handleFiltersApplied}) {
     const handleInputChange = (event) => {
-        debugger;
         handleValueChanged(event.target.name, event.target.value);
     };
 

@@ -1,6 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {app} from "../../../app/app";
-import VisibilityIcon from "@material-ui/icons/Visibility";
 import Loader from "../../common/Loader";
 import {Container} from "@material-ui/core";
 import SectionTitle from "../../common/SectionTitle";
@@ -9,7 +8,6 @@ import Layout from "../../common/Layout";
 import HouseIcon from '@material-ui/icons/House';
 import PersonIcon from "@material-ui/icons/Person";
 import {getISODateStringFrom} from "../../../utils";
-import {PublicationsFilter} from "../PublicationsList/PublicationsFilter";
 import BookingsFilter from "./BookingsFilter";
 
 export default function BookingsList() {

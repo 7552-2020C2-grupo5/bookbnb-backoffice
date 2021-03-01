@@ -50,7 +50,8 @@ export default function UserProfile(props) {
 
     const handleRechargeWalletConfirmation = (amount) => {
         setLoading(true);
-        const accountMnemonic = ".."
+        const accountMnemonic = process.env.REACT_APP_MNEMONIC_WALLET
+        console.log("MNEMONIC: " + accountMnemonic)
         app.apiClient().rechargeWallet(user.address, accountMnemonic, amount, handleRechargeWalletResponse);
     }
 
@@ -83,6 +84,8 @@ export default function UserProfile(props) {
     }, [props.match.params.id]);
 
     useEffect(() => {
+        const accountMnemonic = process.env.REACT_APP_MNEMONIC_WALLET
+        console.log("MNEMONIC: " + accountMnemonic)
         //TODO: Manejar errores
         setLoading(true);
         getUser();

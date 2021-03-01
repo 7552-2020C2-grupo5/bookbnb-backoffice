@@ -16,24 +16,6 @@ export function DataTableCell({row, column, handleClickBlock}) {
                 return renderBlockAction(action);
             }
         })
-        // return (
-        //     <div>
-        //         <Tooltip title="Ver">
-        //             <IconButton component={Link} to={urlViewElement + row[column.field]} color="primary">
-        //                 <VisibilityIcon/>
-        //             </IconButton>
-        //         </Tooltip>
-        //         {showBlockOption ?
-        //             <Tooltip title={"Bloquear"}>
-        //                 <IconButton onClick={handleClickBlock} color="secondary" id={row[column.field]}>
-        //                     <BlockIcon/>
-        //                 </IconButton>
-        //             </Tooltip>
-        //             :
-        //             <React.Fragment/>
-        //         }
-        //     </div>
-        // )
     };
 
     const renderViewAction = (action, Component) => {
@@ -48,9 +30,9 @@ export function DataTableCell({row, column, handleClickBlock}) {
     };
 
     const renderBlockAction = (action) => {
-        // if (!row[action.checkBlockedField]) {
-        //     return <React.Fragment/>
-        // }
+        if (action.checkBlockedField !== "" && row[action.checkBlockedField]) {
+            return <React.Fragment/>
+        }
         return (
             <Tooltip title={"Bloquear"} key={row[action.idField] + action.type}>
                 <IconButton onClick={handleClickBlock} color="secondary" id={row[action.idField]}>

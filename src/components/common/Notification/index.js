@@ -19,7 +19,7 @@ export default function Notification({open, message, isError, onNotificationClos
     };
 
     return (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
+        <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}
                   anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
             <Alert onClose={handleClose} severity={notificationType()}>
                 {message}

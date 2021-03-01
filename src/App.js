@@ -14,6 +14,7 @@ import AdminsList from "./components/views/AdminsList";
 import AdminProfile from "./components/views/AdminProfile";
 import BookingsList from "./components/views/BookingsList";
 import ServersList from "./components/views/ServersList";
+import NewServer from "./components/views/NewServer";
 
 export default function App() {
     const routes = app.routes();
@@ -31,6 +32,7 @@ export default function App() {
             <PrivateRoute exact path={routes.adminProfile} component={AdminProfile}/>
             <PrivateRoute exact path={routes.bookings} component={BookingsList}/>
             <PrivateRoute exact path={routes.servers} component={ServersList}/>
+            <PrivateRoute exact path={routes.newServer} component={NewServer}/>
         </Router>
     );
 }

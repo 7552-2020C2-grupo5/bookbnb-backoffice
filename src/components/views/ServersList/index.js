@@ -8,11 +8,13 @@ import {useStyles} from "./styles";
 import AddIcon from "@material-ui/icons/Add";
 import Container from "@material-ui/core/Container";
 import {Fab} from "@material-ui/core";
+import {useHistory} from "react-router-dom";
 
 export default function ServersList() {
     const [loading, setLoading] = useState(false);
     const [servers, setServers] = useState([]);
     const [notification, setNotification] = useState({message: "", isError: false, open: false});
+    const history = useHistory();
 
     // const [blockedServerId, setBlockedServerId] = useState(0);
     // const [serverOptions, setServerOptions] = useState([]);
@@ -73,6 +75,10 @@ export default function ServersList() {
         app.apiClient().blockServer(serverId, getServers);
     }, [getServers]);
 
+    const handleClickNewServer = () => {
+        history.push(app.routes().newServer);
+    }
+
     useEffect(() => {
         setLoading(true);
         getServers();
@@ -105,7 +111,7 @@ export default function ServersList() {
                            modalTitle={"¿Está seguro que desea bloquear el servidor?"}
                            modalDescription={"No se podrá acceder al servidor bloqueado"}
                            handleBlock={blockServer}/>
-                <Fab className={classes.fab} color="primary" aria-label="add">
+                <Fab className={classes.fab} color="primary" aria-label="add" onClick={handleClickNewServer}>
                     <AddIcon />
                 </Fab>
             </Container>

@@ -2,7 +2,8 @@ import React from "react";
 import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
 import {useStyles} from "./styles";
 
-export default function SelectInput({options, label, handleChange, value, name, inputRef=undefined}) {
+export default function SelectInput({options, label, handleChange, value, name, inputRef=undefined,
+                                        error=undefined}) {
     const classes = useStyles();
 
     return (
@@ -14,9 +15,10 @@ export default function SelectInput({options, label, handleChange, value, name, 
                 label={label}
                 name={name}
                 inputRef={inputRef}
+                error={error}
             >
                 <MenuItem value="">
-                    <em>Ninguno</em>
+                    <em>Ninguno/a</em>
                 </MenuItem>
                 {options.map(option => <MenuItem key={option.text + option.value}
                                                  value={option.value}>{option.text}</MenuItem>)}

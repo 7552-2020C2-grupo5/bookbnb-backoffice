@@ -1,28 +1,36 @@
-import {KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
+import {DatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import 'date-fns';
 import React from "react";
+import {useStyles} from "./styles";
 
-export default function DatePicker({value, handleChange, label}) {
+export default function DatePickerInput({value, handleChange, label, name=undefined, clearable=false}) {
+    const classes = useStyles();
+
     const handleDateChange = (dateValue) => {
-        handleChange(dateValue);
+        if (name === undefined) {
+            handleChange(dateValue);
+        } else {
+            handleChange(name, dateValue);
+        }
     }
 
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
+            <DatePicker
+                className={classes.picker}
+                autoOk={true}
                 disableToolbar
                 inputVariant="outlined"
-                variant="inline"
+                variant="dialog"
                 format="dd/MM/yyyy"
-                margin="normal"
-                id="date-picker-inline"
                 label={label}
                 value={value}
                 onChange={handleDateChange}
-                KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                }}
+                clearable={clearable}
+                cancelLabel="Cancelar"
+                clearLabel="Borrar"
+                okLabel="Confirmar"
             />
         </MuiPickersUtilsProvider>
     );

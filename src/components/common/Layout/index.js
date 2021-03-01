@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import {useTheme} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,17 +9,16 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PersonIcon from "@material-ui/icons/Person";
 import HouseIcon from '@material-ui/icons/House';
-import {useHistory} from 'react-router-dom';
 import {app} from "../../../app/app";
 import MenuOption from "./MenuOption";
 import {Button, Hidden} from "@material-ui/core";
 import Notification from "../Notification";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import BarChartIcon from '@material-ui/icons/BarChart';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import CloudIcon from '@material-ui/icons/Cloud';
 // import useStyles from './styles'
 
 const drawerWidth = 240;
@@ -60,6 +58,9 @@ const useStyles = makeStyles((theme) => ({
     },
     appContent: {
         margin: 10
+    },
+    logout: {
+        float: "right"
     }
 }));
 
@@ -68,7 +69,6 @@ export default function Layout(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    let history = useHistory();
 
     const handleCloseNotification = () => {
         if (props.onNotificationClosed !== undefined) {
@@ -85,8 +85,11 @@ export default function Layout(props) {
 
     const handleLogOut = () => {
         app.logoutUser();
-        history.push("/")
     };
+
+    const handleClickLogout = () => {
+        app.apiClient().adminLogout(handleLogOut);
+    }
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -101,6 +104,8 @@ export default function Layout(props) {
                 <MenuOption icon={PersonIcon} text={'Usuarios'} route={app.routes().users} />
                 <MenuOption icon={HouseIcon} text={'Publicaciones'} route={app.routes().publications} />
                 <MenuOption icon={PersonIcon} text={'Administradores'} route={app.routes().admins} />
+                <MenuOption icon={MenuBookIcon} text={'Reservas'} route={app.routes().bookings} />
+                <MenuOption icon={CloudIcon} text={'Servidores'} route={app.routes().servers} />
             </List>
         </div>
     );
@@ -124,7 +129,7 @@ export default function Layout(props) {
                     <Typography variant="h6" noWrap>
                         BookBnb
                     </Typography>
-                    <Button onClick={handleLogOut}>Cerrar sesión</Button>
+                    <Button onClick={handleClickLogout}>Cerrar sesión</Button>
                 </Toolbar>
             </AppBar>
             <nav className={classes.drawer} aria-label="mailbox folders">

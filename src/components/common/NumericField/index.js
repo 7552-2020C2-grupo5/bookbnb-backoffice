@@ -36,7 +36,7 @@ function NumericField(props) {
     const inputProps = {
         prefix: props.prefix,
         type: props.type,
-        decimalScale: props.decimalScale
+        decimalScale: props.decimalscale
     };
     return (
         <TextField
@@ -51,9 +51,9 @@ function NumericField(props) {
 }
 
 export function DecimalField(props) {
-    return <NumericField {...props} decimalScale={5}/>
+    return <NumericField {...props} decimalscale={5}/>
 }
 
 export function PositiveIntegerField(props) {
-    return <NumericField {...props} decimalScale={0}/>
+    return <NumericField {...props} decimalscale={0}/>
 }

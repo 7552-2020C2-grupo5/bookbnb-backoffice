@@ -1,12 +1,10 @@
 import React, {useCallback, useEffect, useState} from "react";
 import Layout from "../../common/Layout";
-import TimeSeriesBarChart from "./TimeSeriesBarChart";
 import Grid from "@material-ui/core/Grid";
-import TimeSeriesLineChart from "./TimeSeriesLineChart";
 import SectionTitle from "../../common/SectionTitle";
 import Container from "@material-ui/core/Container";
 import {useStyles} from "./styles";
-import DatePicker from "../../common/DatePicker";
+import DatePickerInput from "../../common/DatePicker";
 import Button from "@material-ui/core/Button";
 import {subDays} from 'date-fns'
 import {app} from "../../../app/app";
@@ -38,7 +36,7 @@ export default function Home() {
 
     const handleResponse = (response) => {
         if (response.hasError()) {
-            setNotification({message: response.description,
+            setNotification({message: response.description(),
                 isError: true, open: true});
             setMetrics(undefined)
         } else {
@@ -53,7 +51,6 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
-        debugger;
         setLoading(true);
         getMetrics(new Date(), new Date());
     }, [getMetrics]);
@@ -81,10 +78,10 @@ export default function Home() {
                 <form>
                     <Grid direction="row" justify="flex-start" container className={classes.datesContainer} spacing={2}>
                         <Grid item xs={6} md={3}>
-                            <DatePicker label="Inicio" value={initialDate} handleChange={(date) => setInitialDate(date)}/>
+                            <DatePickerInput label="Inicio" value={initialDate} handleChange={(date) => setInitialDate(date)}/>
                         </Grid>
                         <Grid item xs={6} md={3}>
-                            <DatePicker label="Fin" value={lastDate} handleChange={(date) => setLastDate(date)}/>
+                            <DatePickerInput label="Fin" value={lastDate} handleChange={(date) => setLastDate(date)}/>
                         </Grid>
                         <Grid item xs={6} md={3} className={classes.applyButton}>
                             <Button onClick={handleApplyDatesFilter} color="primary" variant="contained">

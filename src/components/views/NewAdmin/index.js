@@ -66,7 +66,6 @@ export default function NewAdmin() {
 
     const onSubmit = () => {
         if (formIsValid()) {
-            debugger;
             app.apiClient().newAdmin(administratorData, handleResponse);
         }
     };

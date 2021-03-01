@@ -6,6 +6,7 @@ import {app} from "../../../app/app";
 import {Container} from "@material-ui/core";
 import SectionTitle from "../../common/SectionTitle";
 import {UsersFilter} from "../../common/UsersFilter";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 
 
 export default function UsersList() {
@@ -59,7 +60,12 @@ export default function UsersList() {
             {field: 'first_name', type: 'text', headerName: 'Nombre', width: "20%"},
             {field: 'last_name', type: 'text', headerName: 'Apellido', width: "20%"},
             {field: 'email', type: 'text', headerName: 'Mail', width: "20%"},
-            {field: 'id', type: 'actions', headerName: 'Acciones', width: "20%"}
+            {field: 'id', type: 'actions', headerName: 'Acciones', width: "20%",
+                actions: [
+                    {type: "view", urlViewElement: app.routes().users + '/', idField: 'id', icon: VisibilityIcon},
+                    {type: "block", checkBlockedField: "", idField: "id"}
+                ]
+            }
         ])
     };
 
@@ -77,7 +83,6 @@ export default function UsersList() {
                 <DataTable rows={users} columns={columns()}
                            modalTitle={"¿Está seguro que desea bloquear al usuario?"}
                            modalDescription={"Un usuario bloqueado no podrá acceder a la plataforma"}
-                           urlViewElement={app.routes().users + '/'}
                            handleBlock={blockUser}
                 />
             </Container>

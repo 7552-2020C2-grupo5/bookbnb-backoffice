@@ -11,12 +11,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import {DecimalField} from "../../../common/NumericField";
+import SelectInput from "../../../common/SelectInput";
 
-export function AddMoneyToWalletModal({isOpen, handleCancel, handleConfirmation}) {
+export function CreateServerModal({isOpen, handleCancel, handleConfirmation, options}) {
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     const schema = yup.object().shape({
-        amount: yup.number().positive().required()
+        amount: yup.string().required()
     });
 
     const { register, handleSubmit, errors } = useForm({
@@ -46,16 +47,14 @@ export function AddMoneyToWalletModal({isOpen, handleCancel, handleConfirmation}
             aria-describedby="alert-dialog-description"
         >
             <DialogTitle id="alert-dialog-title">
-                {"Carga de saldo"}
+                {"Alta de servidor"}
             </DialogTitle>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        {"Indique el monto en ETH a cargar en la wallet del usuario"}
+                        {"Indique el servidor a dar de alta"}
                     </DialogContentText>
-                    <DecimalField variant="outlined" label="Monto (ETH)" name="amount"
-                                  type="number" inputRef={register({ required: true})}
-                                  error={isValid(errors.amount)} withDecimals={true}/>
+                    <SelectInput options={options} inputRef={}/>
                 </DialogContent>
                 <DialogActions>
                     <Button type="submit" color="primary">

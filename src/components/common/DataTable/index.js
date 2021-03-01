@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     }
 });
 
-export function DataTable({rows, columns, urlViewElement, handleBlock, modalDescription, modalTitle}) {
+export function DataTable({rows, columns, handleBlock=undefined, modalDescription="", modalTitle=""}) {
     const rowsPerPageOptions = [5, 10, 20];
 
     const [page, setPage] = useState(0);
@@ -68,9 +68,9 @@ export function DataTable({rows, columns, urlViewElement, handleBlock, modalDesc
                     <DataTableCell row={row}
                                    key={row.id + column.field}
                                    column={column}
-                                   showBlockOption={showBlockOption()}
                                    handleClickBlock={handleClickBlock}
-                                   urlViewElement={urlViewElement}/>)}
+                    />)
+                }
             </TableRow>
         );
     };

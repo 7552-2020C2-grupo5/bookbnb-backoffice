@@ -5,7 +5,8 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'flex-start'
     },
 }));
 

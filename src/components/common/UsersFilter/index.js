@@ -1,18 +1,10 @@
 import React from "react";
-import Box from "@material-ui/core/Box";
-import {Accordion, AccordionActions, AccordionDetails, AccordionSummary, TextField} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import {useStyles} from "./styles";
+import {TextField} from "@material-ui/core";
 import {FilterContainer} from "../FilterContainer";
 import Grid from "@material-ui/core/Grid";
-import {PositiveIntegerField} from "../NumericField";
 
 
 export function UsersFilter({filters, handleValueChanged, handleFiltersApplied}) {
-    const classes = useStyles();
-
     const handleInputChange = (event) => {
         handleValueChanged(event.target.name, event.target.value);
     };

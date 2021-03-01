@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import {useTheme} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,11 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PersonIcon from "@material-ui/icons/Person";
 import HouseIcon from '@material-ui/icons/House';
-import {useHistory} from 'react-router-dom';
 import {app} from "../../../app/app";
 import MenuOption from "./MenuOption";
 import {Button, Hidden} from "@material-ui/core";

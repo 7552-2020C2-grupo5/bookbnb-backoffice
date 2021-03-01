@@ -1,7 +1,6 @@
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import {Link} from "react-router-dom";
-import VisibilityIcon from '@material-ui/icons/Visibility';
 import BlockIcon from "@material-ui/icons/Block";
 import TableCell from "@material-ui/core/TableCell";
 import React from "react";
@@ -15,6 +14,7 @@ export function DataTableCell({row, column, handleClickBlock}) {
             } else if (action.type === "block") {
                 return renderBlockAction(action);
             }
+            return <React.Fragment/>
         })
     };
 

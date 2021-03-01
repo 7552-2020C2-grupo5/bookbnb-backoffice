@@ -1,8 +1,6 @@
 import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
 import TimeSeriesLineChart from "../TimeSeriesLineChart";
 import TimeSeriesBarChart from "../TimeSeriesBarChart";
-import Container from "@material-ui/core/Container";
 import React from "react";
 
 export default function Metrics({metrics}) {

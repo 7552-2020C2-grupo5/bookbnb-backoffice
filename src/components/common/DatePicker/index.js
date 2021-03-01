@@ -1,4 +1,4 @@
-import {KeyboardDatePicker, MuiPickersUtilsProvider, DatePicker} from "@material-ui/pickers";
+import {DatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import 'date-fns';
 import React from "react";
@@ -31,9 +31,6 @@ export default function DatePickerInput({value, handleChange, label, name=undefi
                 cancelLabel="Cancelar"
                 clearLabel="Borrar"
                 okLabel="Confirmar"
-                KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                }}
             />
         </MuiPickersUtilsProvider>
     );

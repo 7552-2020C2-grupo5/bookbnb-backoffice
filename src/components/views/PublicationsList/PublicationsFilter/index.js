@@ -1,12 +1,9 @@
 import React from "react";
 import {DecimalField, PositiveIntegerField} from "../../../common/NumericField";
-import {useStyles} from "./styles";
 import {FilterContainer} from "../../../common/FilterContainer";
 import Grid from "@material-ui/core/Grid";
 
 export function PublicationsFilter({filters, handleValueChanged, handleFiltersApplied}) {
-    const classes = useStyles();
-
     const handleInputChange = (event) => {
         handleValueChanged(event.target.name, event.target.value);
     };

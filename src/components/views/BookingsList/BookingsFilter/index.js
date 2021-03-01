@@ -3,7 +3,6 @@ import {FilterContainer} from "../../../common/FilterContainer";
 import DatePickerInput from "../../../common/DatePicker";
 import Grid from "@material-ui/core/Grid";
 import SelectInput from "../../../common/SelectInput";
-import {PositiveIntegerField} from "../../../common/NumericField";
 
 export default function BookingsFilter({filters, handleValueChanged, handleFiltersApplied}) {
     const handleInputChange = (event) => {

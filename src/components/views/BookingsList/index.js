@@ -42,17 +42,15 @@ export default function BookingsList() {
         app.apiClient().bookings(filters, handleResponse);
     }, []);
 
-    const getFilters = () => {
-        return {
+
+
+    const handleReload = useCallback(() => {
+        const filtersToApply =  {
             booking_date: getISODateStringFrom(filters.bookingDate),
             initial_date: getISODateStringFrom(filters.initialDate),
             final_date: getISODateStringFrom(filters.finalDate),
             booking_status: filters.bookingStatus,
-        }
-    };
-
-    const handleReload = useCallback(() => {
-        const filtersToApply = getFilters();
+        };
         setLoading(true);
         getBookings(filtersToApply);
     }, [getBookings, filters]);

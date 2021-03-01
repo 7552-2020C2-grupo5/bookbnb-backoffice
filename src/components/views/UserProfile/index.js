@@ -13,7 +13,6 @@ import {getDateStringFrom} from "../../../utils";
 import Button from "@material-ui/core/Button";
 import {AddMoneyToWalletModal} from "./AddMoneyToWalletModal";
 import UserBankInformation from "./UserBankInformation";
-import Metrics from "../Home/Metrics";
 import Typography from "@material-ui/core/Typography";
 
 
@@ -51,7 +50,6 @@ export default function UserProfile(props) {
     const handleRechargeWalletConfirmation = (amount) => {
         setLoading(true);
         const accountMnemonic = process.env.REACT_APP_MNEMONIC_WALLET
-        console.log("MNEMONIC: " + accountMnemonic)
         app.apiClient().rechargeWallet(user.address, accountMnemonic, amount, handleRechargeWalletResponse);
     }
 
@@ -66,17 +64,17 @@ export default function UserProfile(props) {
         setLoading(false);
     }
 
-    const handleReloadBalance = (response) => {
+    const handleReloadBalance = useCallback((response) => {
         if (!response.hasError()) {
             const contentResponse = response.content();
             setUser({...user, ...contentResponse});
         }
         setLoading(false);
-    }
+    },[user]);
 
     const reloadBalance = useCallback(() => {
         app.apiClient().walletBalance(user.address, handleReloadBalance);
-    }, [user]);
+    }, [user, handleReloadBalance]);
 
 
     const getUser = useCallback(() => {
@@ -84,8 +82,6 @@ export default function UserProfile(props) {
     }, [props.match.params.id]);
 
     useEffect(() => {
-        const accountMnemonic = process.env.REACT_APP_MNEMONIC_WALLET
-        console.log("MNEMONIC: " + accountMnemonic)
         //TODO: Manejar errores
         setLoading(true);
         getUser();

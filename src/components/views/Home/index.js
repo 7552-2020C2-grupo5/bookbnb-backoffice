@@ -1,8 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import Layout from "../../common/Layout";
-import TimeSeriesBarChart from "./TimeSeriesBarChart";
 import Grid from "@material-ui/core/Grid";
-import TimeSeriesLineChart from "./TimeSeriesLineChart";
 import SectionTitle from "../../common/SectionTitle";
 import Container from "@material-ui/core/Container";
 import {useStyles} from "./styles";

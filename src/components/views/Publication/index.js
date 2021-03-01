@@ -18,6 +18,10 @@ export default function Publication(props) {
     const classes = useStyles();
     const [notification, setNotification] = useState({message: "", isError: false, open: false});
 
+    const onNotificationClosed = () => {
+        setNotification({...notification, open: false})
+    };
+
 
     const handleResponse = (response) => {
         if (response.hasError()) {
@@ -86,6 +90,6 @@ export default function Publication(props) {
     }
 
     return (
-        <Layout content={content()}/>
+        <Layout content={content()} notification={notification} onNotificationClosed={onNotificationClosed}/>
     );
 }

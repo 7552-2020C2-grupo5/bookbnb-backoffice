@@ -30,7 +30,7 @@ export default function BookingsFilter({filters, handleValueChanged, handleFilte
                                          handleChange={handleValueChanged} clearable={true}/>
                     </Grid>
                     <Grid item xs={6} md={4}>
-                        <SelectInput options={statusOptions()} value={filters.bookingStatus} name="bookingStatus"
+                        <SelectInput options={statusOptions()} label={"Estado"} value={filters.bookingStatus} name="bookingStatus"
                                      handleChange={handleInputChange}/>
                     </Grid>
                 </Grid>

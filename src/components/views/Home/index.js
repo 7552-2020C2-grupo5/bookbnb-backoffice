@@ -13,8 +13,10 @@ import Metrics from "./Metrics";
 
 
 export default function Home() {
-    const [initialDate, setInitialDate] = useState(subDays(new Date(), 7));
-    const [lastDate, setLastDate] = useState(new Date());
+    const lastDateDefaultValue = new Date();
+    const initialDateDefaultValue = subDays(lastDateDefaultValue, 7);
+    const [initialDate, setInitialDate] = useState(initialDateDefaultValue);
+    const [lastDate, setLastDate] = useState(lastDateDefaultValue);
     const [metrics, setMetrics] = useState(undefined);
     const [loading, setLoading] = useState(true);
     const [notification, setNotification] = useState({message: "", isError: false, open: false});
@@ -52,7 +54,7 @@ export default function Home() {
 
     useEffect(() => {
         setLoading(true);
-        getMetrics(new Date(), new Date());
+        getMetrics(initialDateDefaultValue, lastDateDefaultValue);
     }, [getMetrics]);
 
     const metricsContent = () => {

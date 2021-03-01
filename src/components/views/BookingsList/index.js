@@ -15,7 +15,6 @@ export default function BookingsList() {
     const [bookings, setBookings] = useState([]);
     const [notification, setNotification] = useState({message: "", isError: false, open: false});
     const [filters, setFilters] = useState({
-        bookingDate: null,
         bookingStatus: "",
         initialDate: null,
         finalDate: null,
@@ -46,7 +45,6 @@ export default function BookingsList() {
 
     const handleReload = useCallback(() => {
         const filtersToApply =  {
-            booking_date: getISODateStringFrom(filters.bookingDate),
             initial_date: getISODateStringFrom(filters.initialDate),
             final_date: getISODateStringFrom(filters.finalDate),
             booking_status: filters.bookingStatus,

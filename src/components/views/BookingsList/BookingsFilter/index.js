@@ -21,19 +21,15 @@ export default function BookingsFilter({filters, handleValueChanged, handleFilte
         <FilterContainer handleFiltersApplied={handleFiltersApplied}>
             <form>
                 <Grid direction="row" justify="flex-start" container spacing={2}>
-                    <Grid item xs={6} md={3}>
+                    <Grid item xs={6} md={4}>
                         <DatePickerInput label="Mín. fecha de inicio" value={filters.initialDate} name="initialDate"
                                          handleChange={handleValueChanged} clearable={true}/>
                     </Grid>
-                    <Grid item xs={6} md={3}>
+                    <Grid item xs={6} md={4}>
                         <DatePickerInput label="Máx. fecha de fin" value={filters.finalDate} name="finalDate"
                                          handleChange={handleValueChanged} clearable={true}/>
                     </Grid>
-                    <Grid item xs={6} md={3}>
-                        <DatePickerInput label="Fecha de reserva" value={filters.bookingDate} name="bookingDate"
-                                         handleChange={handleValueChanged} clearable={true}/>
-                    </Grid>
-                    <Grid item xs={6} md={3}>
+                    <Grid item xs={6} md={4}>
                         <SelectInput options={statusOptions()} value={filters.bookingStatus} name="bookingStatus"
                                      handleChange={handleInputChange}/>
                     </Grid>

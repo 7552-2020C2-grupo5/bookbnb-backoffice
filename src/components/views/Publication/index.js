@@ -17,27 +17,38 @@ export default function Publication(props) {
     const [loading, setLoading] = useState(true);
     const classes = useStyles();
     const [notification, setNotification] = useState({message: "", isError: false, open: false});
+    const [address, setAddress] = useState(undefined);
 
     const onNotificationClosed = () => {
         setNotification({...notification, open: false})
     };
 
 
-    const handleResponse = (response) => {
+    const handleGetLocationResponse = (response) => {
+        if (!response.hasError()) {
+            setAddress(response.address());
+        }
+        setLoading(false);
+    }
+
+    const handleGetPublicationResponse = (response) => {
         if (response.hasError()) {
             setNotification({message: response.description(),
                 isError: true, open: true});
             setPublication(undefined);
+            setLoading(false);
         } else {
-            setPublication(response.content());
+            const content = response.content();
+            setPublication(content);
+            app.apiClient().getLocationFromCoordinates(content.loc.latitude, content.loc.longitude,
+                handleGetLocationResponse)
         }
-        setLoading(false);
     }
 
     useEffect(() => {
         //TODO: Manejar errores
         setLoading(true);
-        app.apiClient().getPublication(props.match.params.id, handleResponse);
+        app.apiClient().getPublication(props.match.params.id, handleGetPublicationResponse);
     }, [props.match.params.id]);
 
     const publicationImages = () => {
@@ -63,11 +74,12 @@ export default function Publication(props) {
                     <CardContent className={classes.images}>
                         <PublicationImages images={publicationImages()}/>
                     </CardContent>
-                    <CardContent>
+                    <CardContent className={classes.info}>
                         <PublicationInfo bathrooms={publication.bathrooms} beds={publication.beds}
                                          pricePerNight={publication.price_per_night} rooms={publication.rooms}
                                          description={publication.description} publishDate={publicationDate()}
                                          latitude={publication.loc.latitude} longitude={publication.loc.longitude}
+                                         address={address}
                         />
                     </CardContent>
                 </Card>

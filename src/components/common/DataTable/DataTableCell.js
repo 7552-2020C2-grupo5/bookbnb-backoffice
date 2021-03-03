@@ -20,6 +20,10 @@ export function DataTableCell({row, column, handleClickBlock}) {
 
     const renderViewAction = (action, Component) => {
         const title = action?.title || "Ver"
+        const hasBlockedField = action?.checkBlockedField && action.checkBlockedField !== ""
+        if (hasBlockedField && row[action.checkBlockedField]) {
+            return <React.Fragment/>;
+        }
         return (
             <Tooltip title={title} key={row[action.idField] + action.urlViewElement}>
                 <IconButton component={Link} to={action.urlViewElement + row[action.idField]} color="primary">
@@ -31,7 +35,7 @@ export function DataTableCell({row, column, handleClickBlock}) {
 
     const renderBlockAction = (action) => {
         if (action.checkBlockedField !== "" && row[action.checkBlockedField]) {
-            return <React.Fragment/>
+            return <React.Fragment/>;
         }
         return (
             <Tooltip title={"Bloquear"} key={row[action.idField] + action.type}>

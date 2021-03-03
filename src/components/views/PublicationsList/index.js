@@ -33,13 +33,13 @@ export default function PublicationsList() {
         if (response.hasError()) {
             setNotification({message: response.description(), isError: true, open: true});
         } else {
-            setPublications(response.content());
+            setPublications(response.publications());
         }
         setLoading(false);
     }
 
     const getPublications = useCallback((filters= {}) => {
-        app.apiClient().publications(handleResponse, filters);
+        app.apiClient().getAllPublications(handleResponse, filters);
     }, []);
 
     const handleReload = useCallback(() => {
@@ -57,17 +57,19 @@ export default function PublicationsList() {
     }, [getPublications]);
 
     const columns = () => {
-        return ([{field: 'title', type: 'text', headerName: 'Título', width: "20%"},
-            {field: 'description', type: 'text', headerName: 'Descripción', width: "25%"},
+        return ([{field: 'title', type: 'text', headerName: 'Título', width: "10%"},
+            {field: 'description', type: 'text', headerName: 'Descripción', width: "20%"},
             {field: 'rooms', type: 'text', headerName: 'Habitaciones', width: "5%"},
             {field: 'beds', type: 'text', headerName: 'Camas', width: "5%"},
             {field: 'bathrooms', type: 'text', headerName: 'Baños', width: "5%"},
-            {field: 'price_per_night', type: 'text', headerName: 'Precio por noche (ETH)', width: "10%"},
+            {field: 'price_per_night', type: 'text', headerName: 'Precio por noche (ETH)', width: "5%"},
             {field: 'publication_date', type: 'date', headerName: 'Fecha de publicación', width: "10%"},
+            {field: 'status', type: 'text', headerName: 'Estado', width: "10%"},
             {field: 'id', type: 'actions', headerName: 'Acciones', width: "20%",
                 actions: [
-                    {type: "view", urlViewElement: app.routes().publications + '/', idField: 'id', icon: VisibilityIcon},
-                    {type: "block", checkBlockedField: "", idField: "id"}
+                    {type: "view", urlViewElement: app.routes().publications + '/', idField: 'id', icon: VisibilityIcon,
+                        checkBlockedField: "blocked"},
+                    {type: "block", checkBlockedField: "blocked", idField: "id"}
                 ]
             }
         ]);

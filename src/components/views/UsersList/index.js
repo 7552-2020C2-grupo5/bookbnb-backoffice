@@ -32,13 +32,13 @@ export default function UsersList() {
         if (response.hasError()) {
             setNotification({message: response.description(), isError: true, open: true});
         } else {
-            setUsers(response.content());
+            setUsers(response.users());
         }
         setLoading(false);
     };
 
     const getUsers = useCallback((filtersToApply={}) => {
-        app.apiClient().getUsers(handleResponse, filtersToApply);
+        app.apiClient().getAllUsers(handleResponse, filtersToApply);
     }, []);
 
     const handleReload = useCallback(() => {
@@ -60,10 +60,12 @@ export default function UsersList() {
             {field: 'first_name', type: 'text', headerName: 'Nombre', width: "20%"},
             {field: 'last_name', type: 'text', headerName: 'Apellido', width: "20%"},
             {field: 'email', type: 'text', headerName: 'Mail', width: "20%"},
+            {field: 'status', type: 'text', headerName: 'Estado', width: "20%"},
             {field: 'id', type: 'actions', headerName: 'Acciones', width: "20%",
                 actions: [
-                    {type: "view", urlViewElement: app.routes().users + '/', idField: 'id', icon: VisibilityIcon},
-                    {type: "block", checkBlockedField: "", idField: "id"}
+                    {type: "view", urlViewElement: app.routes().users + '/', idField: 'id', icon: VisibilityIcon,
+                        checkBlockedField: "blocked"},
+                    {type: "block", checkBlockedField: "blocked", idField: "id"}
                 ]
             }
         ])

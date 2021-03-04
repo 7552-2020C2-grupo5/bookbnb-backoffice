@@ -9,7 +9,7 @@ import {PublicationInfo} from "./PublicationInfo";
 import {useStyles} from "./styles";
 import {PublicationTitle} from "./PublicationTitle";
 import {app} from "../../../app/app";
-import {getDateStringFrom} from "../../../utils";
+import {formatUTCDateString} from "../../../utils";
 import Typography from "@material-ui/core/Typography";
 
 export default function Publication(props) {
@@ -46,7 +46,6 @@ export default function Publication(props) {
     }
 
     useEffect(() => {
-        //TODO: Manejar errores
         setLoading(true);
         app.apiClient().getPublication(props.match.params.id, handleGetPublicationResponse);
     }, [props.match.params.id]);
@@ -60,7 +59,7 @@ export default function Publication(props) {
     };
 
     const publicationDate = () => {
-        return getDateStringFrom(publication.publication_date);
+        return formatUTCDateString(publication.publication_date);
     }
 
     const publicationContent = () => {

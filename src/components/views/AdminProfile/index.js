@@ -7,7 +7,7 @@ import Container from "@material-ui/core/Container";
 import Loader from "../../common/Loader";
 import {useStyles} from "./styles";
 import {app} from "../../../app/app";
-import {getDateStringFrom} from "../../../utils";
+import {formatUTCDateString} from "../../../utils";
 import UserData from "../UserProfile/UserData";
 import UserAvatar from "../UserProfile/UserAvatar";
 
@@ -43,7 +43,7 @@ export default function AdminProfile(props) {
                     <Divider/>
                     <CardContent>
                         <UserData name={admin.first_name} surname={admin.last_name} email={admin.email}
-                                  registerDate={getDateStringFrom(admin.register_date)}/>
+                                  registerDate={formatUTCDateString(admin.register_date)}/>
                     </CardContent>
                 </Card>
             </Container>

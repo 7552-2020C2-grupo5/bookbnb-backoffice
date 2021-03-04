@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import BlockIcon from "@material-ui/icons/Block";
 import TableCell from "@material-ui/core/TableCell";
 import React from "react";
-import {getDateStringFrom} from "../../../utils";
+import {formatUTCDateString} from "../../../utils";
 
 export function DataTableCell({row, column, handleClickBlock}) {
     const renderActions = (actions) => {
@@ -51,7 +51,7 @@ export function DataTableCell({row, column, handleClickBlock}) {
     };
 
     const renderDate = () => {
-        return (getDateStringFrom(row[column.field]));
+        return (formatUTCDateString(row[column.field]));
     }
 
     const content = () => {

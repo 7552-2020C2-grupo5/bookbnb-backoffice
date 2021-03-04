@@ -27,6 +27,7 @@ export default function Home() {
     };
 
     const handleApplyDatesFilter = () => {
+        debugger;
         if (initialDate >= lastDate) {
             setNotification({message: "La fecha de inicio debe ser menor a la de fin",
                 isError: true, open: true});

@@ -34,8 +34,6 @@ export default function Login() {
             setNotification({message: response.description(), isError: true, open: true});
         } else {
             app.loginUser(response.token());
-            //TODO: Descomentar la de arriba y comentar la de abajo
-            // app.loginUser("AUTH_FAKE");
             history.push(app.routes().home);
         }
     };

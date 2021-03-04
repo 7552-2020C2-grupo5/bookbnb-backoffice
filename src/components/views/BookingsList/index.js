@@ -7,7 +7,7 @@ import {DataTable} from "../../common/DataTable";
 import Layout from "../../common/Layout";
 import HouseIcon from '@material-ui/icons/House';
 import PersonIcon from "@material-ui/icons/Person";
-import {getISODateStringFrom} from "../../../utils";
+import {formatDateToISODateString} from "../../../utils";
 import BookingsFilter from "./BookingsFilter";
 
 export default function BookingsList() {
@@ -45,8 +45,8 @@ export default function BookingsList() {
 
     const handleReload = useCallback(() => {
         const filtersToApply =  {
-            initial_date: getISODateStringFrom(filters.initialDate),
-            final_date: getISODateStringFrom(filters.finalDate),
+            initial_date: formatDateToISODateString(filters.initialDate),
+            final_date: formatDateToISODateString(filters.finalDate),
             booking_status: filters.bookingStatus,
         };
         setLoading(true);

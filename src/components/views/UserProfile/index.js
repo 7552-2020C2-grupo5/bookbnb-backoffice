@@ -9,7 +9,7 @@ import Loader from "../../common/Loader";
 import UserData from "./UserData";
 import {useStyles} from "./styles";
 import {app} from "../../../app/app";
-import {getDateStringFrom} from "../../../utils";
+import {formatUTCDateString} from "../../../utils";
 import Button from "@material-ui/core/Button";
 import {AddMoneyToWalletModal} from "./AddMoneyToWalletModal";
 import UserBankInformation from "./UserBankInformation";
@@ -82,7 +82,6 @@ export default function UserProfile(props) {
     }, [props.match.params.id]);
 
     useEffect(() => {
-        //TODO: Manejar errores
         setLoading(true);
         getUser();
     }, [getUser]);
@@ -98,7 +97,7 @@ export default function UserProfile(props) {
                         <Divider/>
                         <CardContent>
                             <UserData name={user.first_name} surname={user.last_name} email={user.email}
-                                      registerDate={getDateStringFrom(user.register_date)}/>
+                                      registerDate={formatUTCDateString(user.register_date)}/>
                         </CardContent>
                         <CardContent>
                             <UserBankInformation walletAddress={user.address} moneyInEth={user.ETH}

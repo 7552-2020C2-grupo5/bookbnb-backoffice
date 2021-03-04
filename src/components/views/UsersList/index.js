@@ -46,9 +46,17 @@ export default function UsersList() {
         getUsers(filters);
     }, [getUsers, filters]);
 
+    const handleBlockUser = useCallback((response) => {
+        if (response.hasError()) {
+            setNotification({message: response.description(), isError: true, open: true});
+        } else {
+            handleReload()
+        }
+    }, [handleReload]);
+
     const blockUser = useCallback((userId) => {
-        app.apiClient().blockUser(userId, getUsers);
-    }, [getUsers]);
+        app.apiClient().blockUser(userId, handleBlockUser);
+    }, [handleBlockUser]);
 
     useEffect(() => {
         setLoading(true);

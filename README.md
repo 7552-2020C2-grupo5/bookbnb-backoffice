@@ -1,15 +1,12 @@
 # bookbnb-backoffice
 
 Es necesario tener instalado **Node**, **npm** y **yarn**.  
+Se debe clonar el repositorio correspondiente al server-requester.  
 Para levantar el proyecto localmente correr los siguientes comandos:  
 
 ```yarn install```  
 ```yarn start```
 
-Si se desea levantar el proyecto con docker, primero correr:
+Si se desea levantar el proyecto con docker, correr:
 
-```docker-compose build```
-
-Y luego:
-
-```docker-compose up```
+```docker-compose --env .env up --build```

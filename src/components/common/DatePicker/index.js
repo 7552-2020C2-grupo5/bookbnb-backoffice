@@ -8,7 +8,6 @@ export default function DatePickerInput({value, handleChange, label, name=undefi
     const classes = useStyles();
 
     const handleDateChange = (dateValue) => {
-        debugger;
         if (name === undefined) {
             handleChange(dateValue);
         } else {

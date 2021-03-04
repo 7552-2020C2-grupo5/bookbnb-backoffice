@@ -47,9 +47,17 @@ export default function PublicationsList() {
         getPublications(filters);
     }, [getPublications, filters]);
 
+    const handleBlockPublication = useCallback((response) => {
+        if (response.hasError()) {
+            setNotification({message: response.description(), isError: true, open: true});
+        } else {
+            handleReload()
+        }
+    }, [handleReload]);
+
     const blockPublication = useCallback((publicationId) => {
-        app.apiClient().blockPublication(publicationId, getPublications);
-    }, [getPublications]);
+        app.apiClient().blockPublication(publicationId, handleBlockPublication);
+    }, [handleBlockPublication]);
 
     useEffect(() => {
         setLoading(true);

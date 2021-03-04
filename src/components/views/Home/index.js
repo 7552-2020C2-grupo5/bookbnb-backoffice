@@ -10,6 +10,7 @@ import {subDays} from 'date-fns'
 import {app} from "../../../app/app";
 import Loader from "../../common/Loader";
 import Metrics from "./Metrics";
+import {formatDateToISODateString} from "../../../utils";
 
 
 export default function Home() {
@@ -27,7 +28,6 @@ export default function Home() {
     };
 
     const handleApplyDatesFilter = () => {
-        debugger;
         if (initialDate >= lastDate) {
             setNotification({message: "La fecha de inicio debe ser menor a la de fin",
                 isError: true, open: true});
@@ -50,7 +50,8 @@ export default function Home() {
     }
 
     const getMetrics = useCallback((startDate, endDate) => {
-        app.apiClient().getMetrics(startDate, endDate, handleResponse);
+        app.apiClient().getMetrics(formatDateToISODateString(startDate),
+            formatDateToISODateString(endDate), handleResponse);
     }, []);
 
     useEffect(() => {

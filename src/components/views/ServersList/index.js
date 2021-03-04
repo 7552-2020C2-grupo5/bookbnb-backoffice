@@ -34,46 +34,22 @@ export default function ServersList() {
         setLoading(false);
     };
 
-    // const handleGetOptionsForServer = (response) => {
-    //     if (!response.hasError()) {
-    //         setServerOptions(response.content());
-    //     }
-    // };
-
     const getServers = useCallback(() => {
         app.apiClient().getServers(handleGetServersResponse);
     }, []);
 
-    // const markServerAsBlocked = (servers, blockedId) => {
-    //     for (const x of Array(servers.length).keys()) {
-    //         if (servers[x].id === blockedId) {
-    //             servers[x].isBlocked = true;
-    //         }
-    //     }
-    //     setblockedServerId(0);
-    //     // for (let server of servers) {
-    //     //     if (server.id === blockedServerId) {
-    //     //         server.isBlocked = true;
-    //     //         return servers;
-    //     //     }
-    //     // }
-    // }
-
-    // const handleBlockServer = (response) => {
-    //     setNotification({message: response.description(), isError: response.hasError(), open: true});
-    //     if (!response.hasError()) {
-    //         let serversModified = servers;
-    //         markServerAsBlocked(servers, blockedServerId);
-    //     }
-    // }
-    //
-    // const blockServer = useCallback((serverId) => {
-    //     app.apiClient().blockServer(serverId, handleBlockServer);
-    // }, [getServers]);
+    const handleBlockServer = useCallback((response) => {
+        if (response.hasError()) {
+            setNotification({message: response.description(), isError: true, open: true});
+        } else {
+            setLoading(true);
+            getServers();
+        }
+    }, [getServers]);
 
     const blockServer = useCallback((serverId) => {
-        app.apiClient().blockServer(serverId, getServers);
-    }, [getServers]);
+        app.apiClient().blockServer(serverId, handleBlockServer);
+    }, [handleBlockServer]);
 
     const handleClickNewServer = () => {
         history.push(app.routes().newServer);

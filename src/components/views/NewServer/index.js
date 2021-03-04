@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import {useStyles} from "../NewAdmin/styles";
 import Loader from "../../common/Loader";
 import Typography from "@material-ui/core/Typography";
+import StaticField from "../../common/StaticField";
 
 export default function NewServer() {
     const emptyServerName = "";
@@ -36,10 +37,12 @@ export default function NewServer() {
         if (!isErrorResponse) {
             setApiKeyInfo({value: response.token(), show: true});
         }
+        setLoading(false);
     };
 
     const onSubmit = () => {
-        if (validateServerName()) {
+        if (validateServerName() && !apiKeyInfo.show) {
+            setLoading(true);
             app.apiClient().newServer(serverName.value, handleResponse);
         }
     };
@@ -57,7 +60,6 @@ export default function NewServer() {
     }
 
     const handleGetOptionsForServer = (response) => {
-        debugger;
         if (!response.hasError()) {
             setServerOptions(response.serverOptions());
         }
@@ -101,6 +103,7 @@ export default function NewServer() {
                                     <SelectInput label="Servidor" handleChange={handleInputChange}
                                                  name="serverName"
                                                  options={serverOptions}
+                                                 value={serverName.value}
                                                  error={!serverNameIsValid()}/>
                                 </Grid>
                                 {apiKeyInput()}

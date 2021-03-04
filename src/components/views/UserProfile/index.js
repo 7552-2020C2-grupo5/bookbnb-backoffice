@@ -92,7 +92,8 @@ export default function UserProfile(props) {
                 <React.Fragment>
                     <Card className={classes.root}>
                         <CardContent>
-                            <UserAvatar name={user.first_name} surname={user.last_name} avatarSrc={user.avatar}/>
+                            <UserAvatar name={user.first_name} surname={user.last_name}
+                                        avatarSrc={user.profile_picture}/>
                         </CardContent>
                         <Divider/>
                         <CardContent>

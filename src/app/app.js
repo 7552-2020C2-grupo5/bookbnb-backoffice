@@ -27,6 +27,7 @@ class App {
         if (this._apiClient === undefined) {
             this._apiClient = new ApiClient(new RemoteRequester(), undefined, undefined,
                 this.logoutUser);
+            this._apiClient.setServerModeOn();
         }
         if (this.thereIsLoggedInUser() && !this._apiClient.hasToken()) {
             this._apiClient.setToken(this.getUserToken());
